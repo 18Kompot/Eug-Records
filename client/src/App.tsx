@@ -8,6 +8,7 @@ import Login from "./auth/Login";
 import { createContext, useState } from "react";
 import { postRequest } from "./services/api";
 import { setToken } from "./services/storage";
+import { ToastContainer } from "react-toastify";
 
 interface ILoginData {
   email: string;
@@ -53,6 +54,7 @@ function App() {
     <>
       <AppContext.Provider value={{ userId, userName, handleLogout, login }}>
         <Header />
+        <ToastContainer />
         <Routes>
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login handler={login} />} />

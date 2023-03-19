@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AppContext } from "../App";
 import Logout from "../auth/Logout";
+import Search from "./Search";
 import User from "./User";
 
 function Header() {
@@ -29,21 +30,13 @@ function Header() {
             >
               About
             </NavLink>
-            <NavLink className="nav-link text-white col-3" to="/collection">
-              Collection
-            </NavLink>
-            <div className="d-flex" role="search">
-              <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search for an album"
-                aria-label="Search"
-              />
-              <button className="btn btn-outline-warning" type="submit">
-                Search
-              </button>
-            </div>
+            {isLoggedIn && (
+              <NavLink className="nav-link text-white col-3" to="/collection">
+                Collection
+              </NavLink>
+            )}
           </ul>
+          <Search handleSearch={() => {}} />
           {!isLoggedIn && (
             <>
               <span className="d-flex nav-item text-warning me-1">
