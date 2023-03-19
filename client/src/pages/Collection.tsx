@@ -16,6 +16,7 @@ function Collection() {
       .then((response) => response.json())
       .then((json: TCollection) => {
         setRecord(json.releases);
+        setShownRecords(json.releases);
       });
   }
 
@@ -23,7 +24,22 @@ function Collection() {
     let resultRecords: Array<TRecord> = record;
     if (input !== "") {
       resultRecords = record.filter((data: TRecord) => {
-        return record;
+        let matchAltName = false;
+        for (let i = 0; i < data.basic_information.artists.length; i++) {
+          if (
+            data.basic_information.artists[i].name
+              .toLowerCase()
+              .includes(input.toLowerCase())
+          ) {
+            matchAltName = true;
+            break;
+          }
+        }
+        return (
+          data.basic_information.title
+            .toLowerCase()
+            .includes(input.toLowerCase()) || matchAltName
+        );
       });
     }
     setShownRecords(resultRecords);
@@ -39,10 +55,12 @@ function Collection() {
   return (
     <>
       <Title main={<>My record collection</>} sub={<></>} />
+
       <div className="bg-body-secondary">
         <div className="container">
+          <Search handleSearch={handleSearch} />
           <div className="row row-cols-md-2 g-4 text-center m-3">
-            {record.map((record, key) => (
+            {shownRecords.map((record, key) => (
               <div key={key} className="card-group">
                 <div className="card bg-light bg-gradient">
                   <div className="card-body">

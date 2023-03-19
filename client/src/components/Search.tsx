@@ -11,13 +11,10 @@ function Search(props: Props) {
           props.handleSearch(e.target.value);
         }}
         className="form-control"
-        placeholder="Enter an album name.."
+        placeholder="Enter an album or an artist name.."
         aria-label="Search"
         aria-describedby="basic-addon1"
       />
-      <button className="btn btn-outline-warning" type="submit">
-        Search
-      </button>
     </div>
   );
 }

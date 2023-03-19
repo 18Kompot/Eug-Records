@@ -2,7 +2,6 @@ import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AppContext } from "../App";
 import Logout from "../auth/Logout";
-import Search from "./Search";
 import User from "./User";
 
 function Header() {
@@ -36,7 +35,6 @@ function Header() {
               </NavLink>
             )}
           </ul>
-          <Search handleSearch={() => {}} />
           {!isLoggedIn && (
             <>
               <span className="d-flex nav-item text-warning me-1">
