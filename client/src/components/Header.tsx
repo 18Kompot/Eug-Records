@@ -11,29 +11,31 @@ function Header() {
   return (
     <header>
       <nav className="navbar bg-dark navbar-expand-lg bg-body-tertiary ">
-        <div className="container-fluid">
-          <NavLink className="navbar-brand text-warning" to="/#">
-            {/* <img
-              className="m-1"
-              src="https://pixabay.com/get/g726c14b7c90c0fd7dc8b0021c09fdaf113268ea535d56abc68bff712e430694380423c34ef69356b7e5fdbb9680b5b1ce5b0a9c41b3296af5007896763538128_1280.png"
-              alt="record"
-              height="30px"
-            /> */}
-            Eug Records
-          </NavLink>
+        <NavLink className="p-2 navbar-brand text-warning" to="/#">
+          <img
+            className="m-2"
+            src="https://static.vecteezy.com/system/resources/previews/009/313/617/original/vinyl-record-vector-illustration-isolated-on-white-background-free-png.png"
+            alt="record"
+            height="30px"
+          />
+          Eug Records
+        </NavLink>
+        <div className="container">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <NavLink
-              className="nav-link text-white"
-              aria-current="page"
-              to="/about"
-            >
+            <NavLink className="nav-link text-white" to="/about">
               About
             </NavLink>
             {isLoggedIn && (
-              <NavLink className="nav-link text-white col-3" to="/collection">
+              <NavLink className="nav-link text-white" to="/collection">
                 Collection
               </NavLink>
             )}
+            <NavLink className="nav-link text-white" to="/about">
+              My equipment
+            </NavLink>
+            <NavLink className="nav-link text-white" to="/about">
+              Contact me
+            </NavLink>
           </ul>
           {!isLoggedIn && (
             <>

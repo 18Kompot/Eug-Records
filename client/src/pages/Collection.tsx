@@ -56,31 +56,24 @@ function Collection() {
     <>
       <Title main={<>My record collection</>} sub={<></>} />
 
-      <div className="bg-body-secondary">
-        <div className="container">
-          <Search handleSearch={handleSearch} />
-          <div className="row row-cols-md-2 g-4 text-center m-3">
-            {shownRecords.map((record, key) => (
-              <div key={key} className="card-group">
-                <div className="card bg-light bg-gradient">
-                  <div className="card-body">
-                    <img
-                      src={record.basic_information.cover_image}
-                      alt="cover"
-                      height="150px"
-                      width="150px"
-                    />
-                    <h5 className="card-title">
-                      {record.basic_information.title}
-                    </h5>
-                    <h4 className="card-text">
-                      {record.basic_information.artists[0].name}
-                    </h4>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+      <div className="container">
+        <Search handleSearch={handleSearch} />
+        <div className="row d-flex justify-content-center m-3 text-center g-5">
+          {shownRecords.map((record, key) => (
+            <div key={key} className="col-md-3 p-3 me-2 border border-dark">
+              <img
+                className="img-fluid m-2"
+                src={record.basic_information.cover_image}
+                alt="cover"
+                height="200px"
+                width="200px"
+              />
+              <h6 className="card-text m-2">
+                {record.basic_information.artists[0].name} -{" "}
+                {record.basic_information.title}
+              </h6>
+            </div>
+          ))}
         </div>
       </div>
     </>
