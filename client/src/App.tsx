@@ -63,7 +63,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/collection" element={<Collection />} />
           <Route path="/password-reset" element={<Resetpass />} />
-          <Route path="/newpassword" element={<Newpass />} />
+          <Route path="/newpassword/:id/:token" element={<Newpass />} />
         </Routes>
         <div className="d-flex flex-column min-vh-100">
           <Footer />

@@ -52,3 +52,9 @@ export type TCollection = {
   };
   releases: TRecord[];
 };
+
+export interface ISignupData {
+  name: string;
+  email: string;
+  password: string;
+}

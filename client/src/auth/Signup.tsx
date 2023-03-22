@@ -3,13 +3,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Title from "../components/Title";
+import { ISignupData } from "../pages/types";
 import { postRequest } from "../services/api";
-
-interface ISignupData {
-  name: string;
-  email: string;
-  password: string;
-}
 
 function Signup() {
   const navigate = useNavigate();

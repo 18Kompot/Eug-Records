@@ -1,4 +1,66 @@
+import { useEffect, useState } from "react";
+import { getRequest, patchRequest } from "../services/api";
+import { useNavigate, useParams } from "react-router-dom";
+import Joi from "joi";
+import { ISignupData } from "../pages/types";
+
 function Newpass() {
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const { token } = useParams();
+  const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<string>("");
+
+  useEffect(() => {
+    const res = getRequest(`newpassword/${id}/${token}`);
+    if (!res) return;
+
+    res
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.ok === false) {
+          setError("error get the data");
+          return;
+        }
+
+        setPassword(json.password);
+      });
+  }, [id, token]);
+
+  function handleClick() {
+    const schema = Joi.object().keys({
+      password: Joi.string().required(),
+    });
+
+    const { error, value } = schema.validate({
+      password,
+    });
+
+    if (error) {
+      setError(error.message);
+      return;
+    }
+
+    setError("");
+    editPass(value);
+  }
+
+  function editPass(user: ISignupData) {
+    const res = patchRequest(`users/${id}`, user);
+    if (!res) return;
+
+    res
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.error) {
+          setError(json.error);
+          return;
+        }
+
+        navigate("/login");
+      });
+  }
+
   return (
     <div className="container">
       <div className="row d-flex justify-content-center align-items-center h-100">
@@ -18,11 +80,17 @@ function Newpass() {
                           type="password"
                           className="form-control"
                           placeholder="Password"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
                         />
                       </div>
                     </div>
                     <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                      <button type="button" className="btn btn-primary btn-lg">
+                      <button
+                        onClick={handleClick}
+                        type="button"
+                        className="btn btn-primary btn-lg"
+                      >
                         Confirm change
                       </button>
                     </div>
@@ -33,6 +101,7 @@ function Newpass() {
           </div>
         </div>
       </div>
+      {error && <div className="text-danger">{error}</div>}
     </div>
   );
 }
