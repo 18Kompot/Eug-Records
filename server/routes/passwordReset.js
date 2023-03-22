@@ -1,4 +1,5 @@
-const { User } = require("../models/user");
+const { User } = require("../models/User");
+const { Token } = require("../models/Token");
 const sendEmail = require("../utils/sendEmail");
 const Joi = require("joi");
 const crypto = require("crypto");
@@ -23,7 +24,7 @@ router.post("/", async (req, res) => {
       }).save();
     }
 
-    const link = `${"http://localhost:3001/password-reset/"}${user._id}/${
+    const link = `${"http://localhost:3000/newpassword/"}${user._id}/${
       token.token
     }`;
     await sendEmail(user.email, "password reset", link);

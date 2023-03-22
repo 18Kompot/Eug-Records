@@ -1,3 +1,5 @@
+const nodemailer = require("nodemailer");
+
 module.exports = async (email, subject, text) => {
   try {
     const transporter = nodemailer.createTransport({
@@ -7,7 +9,10 @@ module.exports = async (email, subject, text) => {
       secure: true,
       auth: {
         user: "187samp@gmail.com",
-        pass: "12345",
+        pass: "lhercgejdhxesdjp",
+      },
+      tls: {
+        rejectUnauthorized: false,
       },
     });
 

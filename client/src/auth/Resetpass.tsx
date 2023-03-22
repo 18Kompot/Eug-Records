@@ -1,4 +1,60 @@
+import { toast } from "react-toastify";
+import { postRequest } from "../services/api";
+import { useNavigate } from "react-router-dom";
+import Joi from "joi";
+import { useState } from "react";
+
+interface ResetData {
+  email: string;
+}
 function Resetpass() {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState<string>("");
+
+  function submit() {
+    const schema = Joi.object().keys({
+      email: Joi.string()
+        .required()
+        .min(6)
+        .max(256)
+        .email({ tlds: { allow: false } }),
+    });
+
+    const { error, value } = schema.validate({
+      email,
+    });
+
+    if (error) {
+      //   setError(error.message);
+      console.log(error.message);
+      return;
+    }
+    reset(value);
+  }
+
+  function reset(data: ResetData) {
+    const res = postRequest("password-reset", data, false);
+    if (!res) return;
+    res
+      .then((response) => response.json())
+      .then((json) => {
+        if (json.error) {
+          toast.error(json.error, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            progress: undefined,
+            theme: "dark",
+          });
+          return;
+        }
+        navigate("/newpassword");
+      });
+  }
+
   return (
     <div className="container">
       <div className="row d-flex justify-content-center align-items-center h-100">
@@ -16,10 +72,13 @@ function Resetpass() {
                       type="email"
                       className="form-control"
                       placeholder="Email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                     <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                       <button
                         type="button"
+                        onClick={submit}
                         className="btn btn-primary btn-lg m-2"
                       >
                         Reset

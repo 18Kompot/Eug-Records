@@ -10,7 +10,7 @@ const auth = require("./middleware/auth");
 const indexRouter = require("./routes/index");
 const recordsRouter = require("./routes/records");
 const usersRouter = require("./routes/users");
-const passwordReset = require(".routes/password-reset");
+const passwordReset = require("./routes/passwordReset");
 
 const app = express();
 
@@ -24,6 +24,6 @@ app.use(headers);
 app.use("/", indexRouter);
 app.use("/records", auth, recordsRouter);
 app.use("/users", usersRouter);
-// app.use("/passwords", passwordReset);
+app.use("/password-reset", passwordReset);
 
 module.exports = app;
