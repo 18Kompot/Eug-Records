@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
-import { getRequest, patchRequest } from "../services/api";
+import { getRequest, postRequest } from "../services/api";
 import { useNavigate, useParams } from "react-router-dom";
 import Joi from "joi";
-import { ISignupData } from "../pages/types";
 
 function Newpass() {
   const navigate = useNavigate();
-  const { id } = useParams();
-  const { token } = useParams();
+  const { id, token } = useParams();
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
 
@@ -42,11 +40,17 @@ function Newpass() {
     }
 
     setError("");
-    editPass(value);
+    const data = {
+      id: id,
+      token: token,
+      password: value.password,
+    };
+    editPass(data);
   }
 
-  function editPass(user: ISignupData) {
-    const res = patchRequest(`users/${id}`, user);
+  function editPass(data: { id?: string; token?: string; password: string }) {
+    console.log(id, token);
+    const res = postRequest(`password-reset/newpassword`, data);
     if (!res) return;
 
     res

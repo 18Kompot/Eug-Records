@@ -5,6 +5,7 @@ const Joi = require("joi");
 const crypto = require("crypto");
 const express = require("express");
 const router = express.Router();
+const bcrypt = require("bcrypt");
 
 router.post("/", async (req, res) => {
   try {
@@ -36,22 +37,26 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.post("newpassword/:userId/:token", async (req, res) => {
+router.post("/newpassword", async (req, res) => {
   try {
-    const schema = Joi.object({ password: Joi.string().required() });
+    const schema = Joi.object({
+      id: Joi.string().required(),
+      token: Joi.string().required(),
+      password: Joi.string().required(),
+    });
     const { error } = schema.validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
-    const user = await User.findById(req.params.userId);
+    const user = await User.findById(req.body.id);
     if (!user) return res.status(400).send("Invalid link or expired");
 
     const token = await Token.findOne({
       userId: user._id,
-      token: req.params.token,
+      token: req.body.token,
     });
     if (!token) return res.status(400).send("Invalid link or expired");
 
-    user.password = req.body.password;
+    user.password = await bcrypt.hash(req.body.password, 10);
     await user.save();
     await token.delete();
 

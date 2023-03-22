@@ -1,4 +1,5 @@
 const { User } = require("../models/User");
+const { Token } = require("../models/Token");
 const jwt = require("jsonwebtoken");
 const config = require("../config/dev");
 const joi = require("joi");
@@ -108,6 +109,25 @@ module.exports = {
       result.status(400).json({ error: `${err}` });
     }
   },
+
+  // newpassword: async function (request, result, next) {
+  //   try {
+  //     const user = await User.findById(request.params.id);
+  //     if (!user) {
+  //       throw new Error("Invalid request URL");
+  //     }
+
+  //     const token = await Token.findOne({ token: request.params.token });
+  //     if (!token) {
+  //       throw new Error("Token invalid");
+  //     }
+  //     user.password = await bcrypt.hash(value.password, 10);
+  //     user.save();
+  //     result.json({ success: true });
+  //   } catch (err) {
+  //     result.status(400).json({ error: `${err}` });
+  //   }
+  // },
 
   // ====================================================================== //
   //
