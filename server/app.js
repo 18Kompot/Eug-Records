@@ -1,16 +1,18 @@
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
+require("dotenv").config();
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
 
 const headers = require("./middleware/headers");
 const auth = require("./middleware/auth");
 
-var indexRouter = require("./routes/index");
-var recordsRouter = require("./routes/records");
-var usersRouter = require("./routes/users");
+const indexRouter = require("./routes/index");
+const recordsRouter = require("./routes/records");
+const usersRouter = require("./routes/users");
+const passwordReset = require(".routes/password-reset");
 
-var app = express();
+const app = express();
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -22,5 +24,6 @@ app.use(headers);
 app.use("/", indexRouter);
 app.use("/records", auth, recordsRouter);
 app.use("/users", usersRouter);
+// app.use("/passwords", passwordReset);
 
 module.exports = app;

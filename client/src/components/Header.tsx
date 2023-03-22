@@ -67,13 +67,8 @@ function Header() {
 
                 <ul className="dropdown-menu" style={{ margin: 0 }}>
                   <li>
-                    <NavLink className="dropdown-item" to="/about">
-                      Profile
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink className="dropdown-item" to="/about">
-                      Favorites
+                    <NavLink className="dropdown-item" to="/favorites">
+                      <span className="btn">Favorites</span>
                     </NavLink>
                   </li>
                   <li className="nav-item">

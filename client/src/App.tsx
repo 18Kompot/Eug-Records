@@ -9,6 +9,7 @@ import { createContext, useState } from "react";
 import { postRequest } from "./services/api";
 import { setToken } from "./services/storage";
 import { ToastContainer } from "react-toastify";
+import Resetpass from "./auth/Resetpass";
 
 interface ILoginData {
   email: string;
@@ -60,6 +61,7 @@ function App() {
           <Route path="/login" element={<Login handler={login} />} />
           <Route path="/about" element={<About />} />
           <Route path="/collection" element={<Collection />} />
+          <Route path="/password-reset" element={<Resetpass />} />
         </Routes>
         <div className="d-flex flex-column min-vh-100">
           <Footer />

@@ -6,12 +6,9 @@ function Logout() {
   if (!context) return <div>Error</div>;
 
   return (
-    <button
-      onClick={(e) => context.handleLogout()}
-      className="btn btn-link nav-link"
-    >
+    <span className="btn" onClick={(e) => context.handleLogout()}>
       Log Out
-    </button>
+    </span>
   );
 }
 
