@@ -5,30 +5,29 @@ function Footer() {
 
   return (
     <>
-      <div className="text-dark row justify-content-center bg-secondary opacity-40 mt-auto">
-        <div className="col-md-3">
-          {/* <img
-            src="https://static.vecteezy.com/system/resources/previews/009/313/617/original/vinyl-record-vector-illustration-isolated-on-white-background-free-png.png"
-            alt="record"
-            height="30px"
-          /> */}
-
+      <div className="text-dark d-flex justify-content-center bg-dark opacity-40 mt-auto">
+        <div className="text-light col-md-3">
           <h6>Contact Information</h6>
-          <div className="col-md-3">
-            <p>My email my phone</p>
-          </div>
+          <span>My email</span>
+          <span>My phone</span>
         </div>
-        <div className="col-md-3">
+        <div className="row col-md-3 text-light">
           <h6>Site Map</h6>
           <div className="col-md-3">
-            <span className="row">
-              <Link to={`/about`}>About</Link>
-              <Link to={`/equipment`}>Equipment</Link>
-              <Link to={`/contact`}>Contact me</Link>
+            <span className="col">
+              <Link className="nav-link" to={`/about`}>
+                About
+              </Link>
+              <Link className="nav-link" to={`/equipment`}>
+                Equipment
+              </Link>
+              <Link className="nav-link" to={`/contact`}>
+                Contact me
+              </Link>
             </span>
           </div>
         </div>
-        <div className="col-md-3">
+        <div className="col-md-3 text-light">
           <h6>Social Media</h6>
           <span className="row m-3">
             <a
@@ -54,7 +53,9 @@ function Footer() {
             </a>
           </span>
         </div>
-        <p className="text-center">Created By Evgeny Kroitoru {year} &#169;</p>
+        <p className="text-center text-light">
+          Created By Evgeny Kroitoru {year} &#169;
+        </p>
       </div>
     </>
   );

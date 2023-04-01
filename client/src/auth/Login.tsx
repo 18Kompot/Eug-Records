@@ -44,7 +44,10 @@ function Login({ handler }: Props) {
         sub={
           <>
             sign in to your account or {""}
-            <NavLink to={"/signup"}>create one</NavLink> if you're new :)
+            <NavLink className="text-secondary" to={"/signup"}>
+              create one
+            </NavLink>{" "}
+            if you're new :)
           </>
         }
       />
@@ -57,7 +60,7 @@ function Login({ handler }: Props) {
               <div className="card-body p-md-5">
                 <div className="row justify-content-center">
                   <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-                    <p className="text-center h2 fw-bold mb-5 mx-1 mx-md-4 mt-4">
+                    <p className="text-light text-center h2 fw-bold mb-5 mx-1 mx-md-4 mt-4">
                       Sign in
                     </p>
                     <div className="mx-1 mx-md-4">
@@ -70,7 +73,7 @@ function Login({ handler }: Props) {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                           />
-                          <label>Your Email</label>
+                          <label className="text-secondary">Your Email</label>
                         </div>
                       </div>
 
@@ -83,19 +86,24 @@ function Login({ handler }: Props) {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                           />
-                          <label>Password</label>
+                          <label className="text-secondary">Password</label>
                         </div>
                       </div>
                       <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                         <button
                           type="button"
                           onClick={submit}
-                          className="btn btn-primary btn-lg"
+                          className="btn btn-info btn-lg"
                         >
                           Login
                         </button>
                       </div>
-                      <NavLink to={"/password-reset"}>Forgot password</NavLink>
+                      <NavLink
+                        className="nav-link text-secondary"
+                        to={"/password-reset"}
+                      >
+                        Forgot password
+                      </NavLink>
                     </div>
                   </div>
                   <div className="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">

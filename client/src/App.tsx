@@ -12,6 +12,7 @@ import { ToastContainer } from "react-toastify";
 import Resetpass from "./auth/Resetpass";
 import Newpass from "./auth/Newpass";
 import Recordinfo from "./pages/Recordinfo";
+import "./App.css";
 
 interface ILoginData {
   email: string;
@@ -55,22 +56,24 @@ function App() {
 
   return (
     <>
-      <AppContext.Provider value={{ userId, userName, handleLogout, login }}>
-        <Header />
-        <ToastContainer />
-        <Routes>
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login handler={login} />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/info/:id" element={<Recordinfo />} />
-          <Route path="/collection" element={<Collection />} />
-          <Route path="/password-reset" element={<Resetpass />} />
-          <Route path="/newpassword/:id/:token" element={<Newpass />} />
-        </Routes>
-        <div className="d-flex flex-column min-vh-100">
-          <Footer />
-        </div>
-      </AppContext.Provider>
+      <div className="body">
+        <AppContext.Provider value={{ userId, userName, handleLogout, login }}>
+          <Header />
+          <ToastContainer />
+          <Routes>
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/login" element={<Login handler={login} />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/info/:id" element={<Recordinfo />} />
+            <Route path="/collection" element={<Collection />} />
+            <Route path="/password-reset" element={<Resetpass />} />
+            <Route path="/newpassword/:id/:token" element={<Newpass />} />
+          </Routes>
+          <div className="d-flex flex-column min-vh-100">
+            <Footer />
+          </div>
+        </AppContext.Provider>
+      </div>
     </>
   );
 }

@@ -77,7 +77,7 @@ function Signup() {
               <div className="card-body p-md-5">
                 <div className="row justify-content-center">
                   <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-                    <p className="text-center h2 fw-bold mb-5 mx-1 mx-md-4 mt-4">
+                    <p className="text-center text-light h2 fw-bold mb-5 mx-1 mx-md-4 mt-4">
                       Sign up
                     </p>
 
@@ -87,7 +87,7 @@ function Signup() {
                           className="bi bi-person me-3"
                           style={{'font-size: 70px;'}}
                         ></i> */}
-                        <div className="form-outline flex-fill mb-0">
+                        <div className="form-outline text-secondary flex-fill mb-0">
                           <input
                             type="text"
                             className="form-control"
@@ -100,7 +100,7 @@ function Signup() {
                       </div>
 
                       <div className="d-flex flex-row align-items-center mb-4">
-                        <div className="form-outline flex-fill mb-0">
+                        <div className="form-outline text-secondary flex-fill mb-0">
                           <input
                             type="email"
                             className="form-control"
@@ -113,7 +113,7 @@ function Signup() {
                       </div>
 
                       <div className="d-flex flex-row align-items-center mb-4">
-                        <div className="form-outline flex-fill mb-0">
+                        <div className="form-outline text-secondary flex-fill mb-0">
                           <input
                             type="password"
                             className="form-control"
@@ -128,7 +128,7 @@ function Signup() {
                         <button
                           type="button"
                           onClick={submit}
-                          className="btn btn-primary btn-lg"
+                          className="btn btn-info btn-lg"
                         >
                           Register
                         </button>

@@ -64,10 +64,10 @@ function Collection() {
           {shownRecords.map((record, key) => (
             <div
               key={key}
-              className="d-flex flex-column col-md-3 p-3 me-2 border border-dark"
+              className="d-flex rounded bg-light flex-column col-md-3 p-3 me-2 border border-dark"
             >
               <img
-                className="img-fluid rounded mx-auto"
+                className="img-fluid mx-auto"
                 src={record.basic_information.cover_image}
                 alt="cover"
                 height="200px"
@@ -80,15 +80,15 @@ function Collection() {
               </h6>
 
               <div className="d-flex align-items-center justify-content-center">
-                <Link to={``} className="btn btn-secondary text-white m-1">
-                  <span className="px-1 bi-cart-plus"></span>
+                <Link to={``} className="btn btn-warning text-white m-1">
+                  <span className="px-1 text-dark bi-cart-plus"></span>
                 </Link>
 
                 <Link
                   to={`/info/${record.id}`}
-                  className="btn btn-secondary text-white m-1"
+                  className="btn btn-light border-dark text-white m-1"
                 >
-                  <span className="px-1 bi-info-circle"></span>
+                  <span className="px-1 text-dark bi-info-circle"></span>
                 </Link>
               </div>
             </div>
