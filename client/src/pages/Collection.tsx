@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
 import Search from "../components/Search";
 import Title from "../components/Title";
 import { TCollection, TRecord } from "../pages/types";
@@ -60,18 +62,35 @@ function Collection() {
         <Search handleSearch={handleSearch} />
         <div className="row d-flex justify-content-center m-3 text-center g-5">
           {shownRecords.map((record, key) => (
-            <div key={key} className="col-md-3 p-3 me-2 border border-dark">
+            <div
+              key={key}
+              className="d-flex flex-column col-md-3 p-3 me-2 border border-dark"
+            >
               <img
-                className="img-fluid m-2"
+                className="img-fluid rounded mx-auto"
                 src={record.basic_information.cover_image}
                 alt="cover"
                 height="200px"
                 width="200px"
               />
-              <h6 className="card-text m-2">
+
+              <h6 className="card-text m-2 mb-auto py-2">
                 {record.basic_information.artists[0].name} -{" "}
                 {record.basic_information.title}
               </h6>
+
+              <div className="d-flex align-items-center justify-content-center">
+                <Link to={``} className="btn btn-secondary text-white m-1">
+                  <span className="px-1 bi-cart-plus"></span>
+                </Link>
+
+                <Link
+                  to={`/info/${record.id}`}
+                  className="btn btn-secondary text-white m-1"
+                >
+                  <span className="px-1 bi-info-circle"></span>
+                </Link>
+              </div>
             </div>
           ))}
         </div>

@@ -37,6 +37,7 @@ export type TRecord = {
     style: string[];
   };
   folder_id: number;
+  is_favorite: boolean;
 };
 
 export type TCollection = {

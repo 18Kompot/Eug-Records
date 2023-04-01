@@ -11,6 +11,7 @@ import { setToken } from "./services/storage";
 import { ToastContainer } from "react-toastify";
 import Resetpass from "./auth/Resetpass";
 import Newpass from "./auth/Newpass";
+import Recordinfo from "./pages/Recordinfo";
 
 interface ILoginData {
   email: string;
@@ -61,6 +62,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login handler={login} />} />
           <Route path="/about" element={<About />} />
+          <Route path="/info/:id" element={<Recordinfo />} />
           <Route path="/collection" element={<Collection />} />
           <Route path="/password-reset" element={<Resetpass />} />
           <Route path="/newpassword/:id/:token" element={<Newpass />} />
