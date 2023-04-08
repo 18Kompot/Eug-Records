@@ -5,7 +5,7 @@ import Collection from "./pages/Collection";
 import About from "./pages/About";
 import Signup from "./auth/Signup";
 import Login from "./auth/Login";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { postRequest } from "./services/api";
 import { setToken } from "./services/storage";
 import { ToastContainer } from "react-toastify";
@@ -24,6 +24,8 @@ interface Context {
   userName: string;
   handleLogout: Function;
   login: Function;
+  cartRecordIds: number[];
+  handleAddRecordId: (id: number) => void;
 }
 
 export const AppContext = createContext<Context | null>(null);
@@ -31,6 +33,7 @@ export const AppContext = createContext<Context | null>(null);
 function App() {
   const [userId, setUserId] = useState<string>("");
   const [userName, setUserName] = useState<string>("");
+  const [cartRecordIds, setCartRecordIds] = useState<number[]>([]);
   const navigate = useNavigate();
 
   function handleLogout() {
@@ -54,27 +57,42 @@ function App() {
       });
   }
 
+  function addRecordId(id: number) {
+    setCartRecordIds([...cartRecordIds, id]);
+  }
+
+  useEffect(() => {
+    console.log(cartRecordIds);
+  }, [cartRecordIds]);
+
   return (
-    <>
-      <div className="body">
-        <AppContext.Provider value={{ userId, userName, handleLogout, login }}>
-          <Header />
-          <ToastContainer />
-          <Routes>
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/login" element={<Login handler={login} />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/info/:id" element={<Recordinfo />} />
-            <Route path="/collection" element={<Collection />} />
-            <Route path="/password-reset" element={<Resetpass />} />
-            <Route path="/newpassword/:id/:token" element={<Newpass />} />
-          </Routes>
-          <div className="d-flex flex-column min-vh-100">
-            <Footer />
-          </div>
-        </AppContext.Provider>
-      </div>
-    </>
+    <div className="d-flex flex-column body min-vh-100">
+      <AppContext.Provider
+        value={{
+          userId,
+          userName,
+          handleLogout,
+          login,
+          cartRecordIds,
+          handleAddRecordId: addRecordId,
+        }}
+      >
+        <Header />
+        <ToastContainer />
+        <Routes>
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login handler={login} />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/info/:id" element={<Recordinfo />} />
+          <Route path="/collection" element={<Collection />} />
+          <Route path="/password-reset" element={<Resetpass />} />
+          <Route path="/newpassword/:id/:token" element={<Newpass />} />
+        </Routes>
+        <footer className="d-flex flex-column mt-auto">
+          <Footer />
+        </footer>
+      </AppContext.Provider>
+    </div>
   );
 }
 export default App;

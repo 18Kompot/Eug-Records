@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 
 import Search from "../components/Search";
 import Title from "../components/Title";
 import { TCollection, TRecord } from "../pages/types";
 import { getRequest } from "../services/api";
+import { AppContext } from "../App";
 
 function Collection() {
+  const appContext = useContext(AppContext);
   const [record, setRecord] = useState<TRecord[]>([]);
   const [shownRecords, setShownRecords] = useState<Array<TRecord>>([]);
 
@@ -80,9 +82,12 @@ function Collection() {
               </h6>
 
               <div className="d-flex align-items-center justify-content-center">
-                <Link to={``} className="btn btn-warning text-white m-1">
+                <button
+                  onClick={(_) => appContext?.handleAddRecordId(record.id)}
+                  className="btn btn-warning text-white m-1"
+                >
                   <span className="px-1 text-dark bi-cart-plus"></span>
-                </Link>
+                </button>
 
                 <Link
                   to={`/info/${record.id}`}

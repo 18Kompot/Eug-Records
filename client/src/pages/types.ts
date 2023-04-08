@@ -1,3 +1,42 @@
+export type TArtist = {
+  name: string;
+  anv: string;
+  join: string;
+  role: string;
+  tracks: string;
+  id: number;
+  resource_url: string;
+};
+
+export type TLabel = {
+  name: string;
+  catno: string;
+  entity_type: string;
+  entity_type_name: string;
+  id: number;
+  resource_url: string;
+};
+
+export type TIdentifier = {
+  type: string;
+  value: string;
+  description: string;
+};
+
+export type TFormat = {
+  name: string;
+  qty: string;
+  descriptions: string[];
+};
+
+export type TTrack = {
+  position: string;
+  type_: string;
+  title: string;
+  extraartists: [];
+  duration: string;
+};
+
 export type TRecord = {
   id: number;
   instance_id: number;
@@ -11,28 +50,9 @@ export type TRecord = {
     cover_image: string;
     title: string;
     year: number;
-    formats: {
-      name: string;
-      qty: string;
-      descriptions: string[];
-    }[];
-    labels: {
-      name: string;
-      catno: string;
-      entity_type: string;
-      entity_type_name: string;
-      id: number;
-      resource_url: string;
-    }[];
-    artists: {
-      name: string;
-      anv: string;
-      join: string;
-      role: string;
-      tracks: string;
-      id: number;
-      resource_url: string;
-    }[];
+    labels: TLabel[];
+    artists: TArtist[];
+    formats: TFormat[];
     genres: string[];
     style: string[];
   };
@@ -52,6 +72,19 @@ export type TCollection = {
     };
   };
   releases: TRecord[];
+};
+
+export type InfoData = {
+  artists_sort: string;
+  title: string;
+  released_formatted: string;
+  country: string;
+  labels: TLabel[];
+  artists: TArtist[];
+  genres: string[];
+  formats: TFormat[];
+  identifiers: TIdentifier[];
+  tracklist: TTrack[];
 };
 
 export interface ISignupData {

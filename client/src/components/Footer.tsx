@@ -5,57 +5,42 @@ function Footer() {
 
   return (
     <>
-      <div className="text-dark d-flex justify-content-center bg-dark opacity-40 mt-auto">
-        <div className="text-light col-md-3">
-          <h6>Contact Information</h6>
-          <span>My email</span>
-          <span>My phone</span>
-        </div>
-        <div className="row col-md-3 text-light">
-          <h6>Site Map</h6>
-          <div className="col-md-3">
-            <span className="col">
-              <Link className="nav-link" to={`/about`}>
-                About
-              </Link>
-              <Link className="nav-link" to={`/equipment`}>
-                Equipment
-              </Link>
-              <Link className="nav-link" to={`/contact`}>
-                Contact me
-              </Link>
-            </span>
+      <div className="text-light bg-dark opacity-40 py-2">
+        <div className="row">
+          <div className="col text-center">
+            <h4>Social Media</h4>
+          </div>
+          <div className="col text-center">
+            <h4>Contact Information</h4>
+            <div>My email</div>
+            <div>My phone</div>
+          </div>
+          <div className="col text-center">
+            <h4>Site Map</h4>
+            <Link className="nav-link" to={`/about`}>
+              About
+            </Link>
+            <Link className="nav-link" to={`/equipment`}>
+              Equipment
+            </Link>
+            <Link className="nav-link" to={`/contact`}>
+              Contact me
+            </Link>
           </div>
         </div>
-        <div className="col-md-3 text-light">
-          <h6>Social Media</h6>
-          <span className="row m-3">
-            <a
-              href="https://www.linkedin.com/in/eugkro"
-              target="_blank"
-              rel="noreferrer"
-            >
-              LinkedIn
-            </a>
-            <a
-              href="https://www.discogs.com/user/Primo18"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Discogs
-            </a>
-            <a
-              href="https://www.youtube.com/18compton"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Youtube
-            </a>
-          </span>
+        <div className="row pt-2">
+          <hr></hr>
+          <div className="d-flex text-center">
+            <span className=" col justify-content-start align-self-center">
+              Created By Evgeny Kroitoru {year} &#169;
+            </span>
+            <div className="col justify-content-end">
+              <i className="mx-2 bi bi-vinyl fs-4"></i>
+              <i className="mx-2 bi bi-youtube fs-4"></i>
+              <i className="mx-2 bi bi-linkedin fs-4"></i>
+            </div>
+          </div>
         </div>
-        <p className="text-center text-light">
-          Created By Evgeny Kroitoru {year} &#169;
-        </p>
       </div>
     </>
   );
