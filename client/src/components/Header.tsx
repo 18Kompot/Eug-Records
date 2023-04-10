@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AppContext } from "../App";
 import Logout from "../auth/Logout";
 import User from "./User";
@@ -10,15 +10,14 @@ function Header() {
 
   return (
     <header>
-      <nav className="navbar bg-dark navbar-expand-lg bg-body-tertiary ">
+      <nav className="navbar bg-dark navbar-expand-lg bg-body-tertiary">
         <NavLink className="p-2 navbar-brand text-warning" to="/#">
           <img
-            className="m-2"
-            src="https://static.vecteezy.com/system/resources/previews/009/313/617/original/vinyl-record-vector-illustration-isolated-on-white-background-free-png.png"
+            className=""
+            src="https://images.squarespace-cdn.com/content/v1/518f36c0e4b062dc22411eae/1498528865052-FNAYYP1O31KOKZ7W8UYW/TRS-logo-recordplatter-one+colour+%281%29.png"
             alt="record"
-            height="30px"
+            height="76px"
           />
-          Eug Records
         </NavLink>
         <div className="container">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
@@ -54,8 +53,18 @@ function Header() {
           )}
           {isLoggedIn && (
             <>
-              <div className="dropdown d-flex me-3">
-                <button className="btn btn-light bi bi-cart3 me-2"></button>
+              <div className="dropdown position-relative me-3">
+                <Link
+                  to={"/cart"}
+                  className="btn btn-light bi bi-cart3 me-2 position-relative"
+                >
+                  {context?.cartRecords.length > 0 && (
+                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                      {context.cartRecords.length}
+                      <span className="visually-hidden">Records in cart</span>
+                    </span>
+                  )}
+                </Link>
                 <button
                   className="btn btn-info dropdown-toggle"
                   type="button"
@@ -65,7 +74,10 @@ function Header() {
                   <User />
                 </button>
 
-                <ul className="dropdown-menu" style={{ margin: 0 }}>
+                <ul
+                  className="dropdown-menu position-absolute top-100 start-0 w-100"
+                  style={{ margin: 0 }}
+                >
                   <li>
                     <NavLink className="dropdown-item" to="/favorites">
                       <span className="btn">Favorites</span>

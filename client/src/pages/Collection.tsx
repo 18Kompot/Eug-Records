@@ -1,16 +1,23 @@
 import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
-
 import Search from "../components/Search";
 import Title from "../components/Title";
 import { TCollection, TRecord } from "../pages/types";
 import { getRequest } from "../services/api";
 import { AppContext } from "../App";
+import { Pagination } from "react-bootstrap";
 
 function Collection() {
   const appContext = useContext(AppContext);
   const [record, setRecord] = useState<TRecord[]>([]);
   const [shownRecords, setShownRecords] = useState<Array<TRecord>>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
+  const itemsPerPage = 15;
+  const totalPages = Math.ceil(shownRecords.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentRecords = shownRecords.slice(startIndex, endIndex);
 
   function getRelease() {
     const res = getRequest("records");
@@ -47,23 +54,38 @@ function Collection() {
       });
     }
     setShownRecords(resultRecords);
+    setCurrentPage(1);
+  }
+
+  function handlePageChange(pageNumber: number) {
+    setCurrentPage(pageNumber);
+    window.scrollTo(0, 0); // Scroll to the top of the page
   }
 
   useEffect(() => {
-    return () => {
-      console.log("useEffect");
-      getRelease();
-    };
+    getRelease();
   }, []);
+
+  const items = [];
+  for (let page = 1; page <= totalPages; page++) {
+    items.push(
+      <Pagination.Item
+        key={page}
+        active={page === currentPage}
+        onClick={() => handlePageChange(page)}
+      >
+        {page}
+      </Pagination.Item>
+    );
+  }
 
   return (
     <>
       <Title main={<>My record collection</>} sub={<></>} />
-
       <div className="container">
         <Search handleSearch={handleSearch} />
-        <div className="row d-flex justify-content-center m-3 text-center g-5">
-          {shownRecords.map((record, key) => (
+        <div className="row d-flex justify-content-center p-4 text-center g-5">
+          {currentRecords.map((record, key) => (
             <div
               key={key}
               className="d-flex rounded bg-light flex-column col-md-3 p-3 me-2 border border-dark"
@@ -83,7 +105,7 @@ function Collection() {
 
               <div className="d-flex align-items-center justify-content-center">
                 <button
-                  onClick={(_) => appContext?.handleAddRecordId(record.id)}
+                  onClick={(_) => appContext?.handleAddRecord(record)}
                   className="btn btn-warning text-white m-1"
                 >
                   <span className="px-1 text-dark bi-cart-plus"></span>
@@ -98,6 +120,9 @@ function Collection() {
               </div>
             </div>
           ))}
+          <div className="d-flex justify-content-center">
+            <Pagination>{items}</Pagination>
+          </div>
         </div>
       </div>
     </>

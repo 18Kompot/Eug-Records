@@ -5,18 +5,23 @@ function Footer() {
 
   return (
     <>
-      <div className="text-light bg-dark opacity-40 py-2">
+      <div className="container-fluid text-light bg-dark opacity-40 py-4">
         <div className="row">
           <div className="col text-center">
-            <h4>Social Media</h4>
+            <img
+              className=""
+              src="https://images.squarespace-cdn.com/content/v1/518f36c0e4b062dc22411eae/1498528865052-FNAYYP1O31KOKZ7W8UYW/TRS-logo-recordplatter-one+colour+%281%29.png"
+              alt="record"
+              height="100px"
+            />
           </div>
           <div className="col text-center">
-            <h4>Contact Information</h4>
+            <p>CONTACT INFORMATION</p>
             <div>My email</div>
             <div>My phone</div>
           </div>
           <div className="col text-center">
-            <h4>Site Map</h4>
+            <p>SITE MAP</p>
             <Link className="nav-link" to={`/about`}>
               About
             </Link>
@@ -29,9 +34,9 @@ function Footer() {
           </div>
         </div>
         <div className="row pt-2">
-          <hr></hr>
+          <hr className="mt-2"></hr>
           <div className="d-flex text-center">
-            <span className=" col justify-content-start align-self-center">
+            <span className="col justify-content-start align-self-center">
               Created By Evgeny Kroitoru {year} &#169;
             </span>
             <div className="col justify-content-end">
