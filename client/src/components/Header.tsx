@@ -29,10 +29,10 @@ function Header() {
                 Collection
               </NavLink>
             )}
-            <NavLink className="nav-link text-white" to="/about">
+            <NavLink className="nav-link text-white" to="/equipment">
               My equipment
             </NavLink>
-            <NavLink className="nav-link text-white" to="/about">
+            <NavLink className="nav-link text-white" to="/contact">
               Contact me
             </NavLink>
           </ul>
@@ -79,7 +79,7 @@ function Header() {
                   style={{ margin: 0 }}
                 >
                   <li>
-                    <NavLink className="dropdown-item" to="/favorites">
+                    <NavLink className="nav-item" to="/favorites">
                       <span className="btn">Favorites</span>
                     </NavLink>
                   </li>

@@ -44,6 +44,16 @@ function App() {
     localStorage.clear();
     setUserId("");
     setUserName("");
+    toast.error(`You successfully logged out`, {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "dark",
+    });
     navigate("/login");
   }
 
@@ -58,6 +68,17 @@ function App() {
         setUserId(json.id);
         setUserName(json.name);
         navigate("/collection");
+
+        toast.success(`Welcome back ${json.name}!`, {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+          theme: "light",
+        });
       });
   }
 

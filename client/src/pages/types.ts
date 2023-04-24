@@ -47,9 +47,9 @@ export type TRecord = {
     master_id: number;
     resource_url: string;
     thumb: string;
-    cover_image: string;
     title: string;
     year: number;
+    cover_image: string;
     labels: TLabel[];
     artists: TArtist[];
     formats: TFormat[];

@@ -93,25 +93,26 @@ function Recordinfo() {
 
   function getTracks(tracks: TTrack[]) {
     if (tracks.length < 1) {
-      return "";
+      return null;
     }
-    let names = " ";
-    tracks.forEach((track: TTrack, index: number) => {
-      if (index !== 0) {
-        names += ", ";
-      }
-      names += `${track.position}: ${track.title}`;
-    });
-    return names;
+    return (
+      <ul>
+        {tracks.map((track: TTrack) => (
+          <li key={track.position}>
+            {track.position}: {track.title}
+          </li>
+        ))}
+      </ul>
+    );
   }
 
   return (
     <>
-      <div className="vh-100 p-4 container d-flex justify-content-center align-items-center">
-        <div className="card h-100">
+      <div className="p-4 container">
+        <div className="card bg-light">
           <div className="card-body">
             <h6>{record?.title}</h6>
-            <p className="card-text">
+            <p>
               <b>Artist:</b> {record?.artists_sort}
               <br />
               <b>Released:</b> {record?.released_formatted}
