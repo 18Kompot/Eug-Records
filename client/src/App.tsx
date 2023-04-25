@@ -5,9 +5,9 @@ import Collection from "./pages/Collection";
 import About from "./pages/About";
 import Signup from "./auth/Signup";
 import Login from "./auth/Login";
-import { createContext, useState } from "react";
-import { postRequest } from "./services/api";
-import { setToken } from "./services/storage";
+import { createContext, useEffect, useState } from "react";
+import { getRequest, postRequest } from "./services/api";
+import { getStoredUsername, setStoredUsername, setToken, verifyToken } from "./services/storage";
 import { ToastContainer, toast } from "react-toastify";
 import Resetpass from "./auth/Resetpass";
 import Newpass from "./auth/Newpass";
@@ -42,6 +42,41 @@ function App() {
   const [cartRecords, setCartRecords] = useState<TRecord[]>([]);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const isValidToken = verifyToken();
+    if (!isValidToken) {
+      localStorage.clear();
+      navigate("/login");
+      return;
+    }
+
+    const res = getRequest(`users/fetch/${getStoredUsername()}`);
+    if (!res) {
+      // The user's data could not be retrieved. Demand them to log in again?
+      localStorage.clear();
+      navigate("/login");
+      return;
+    }
+
+    res
+      .then((response) => {
+        if (!response.ok) {
+          localStorage.clear();
+          navigate("/login");
+          return;
+        }
+        return response.json();
+      })
+      .then((json) => {
+        if (!json) {
+          return;
+        }
+
+        setUserId(json.id);
+        setUserName(json.name);
+      });
+  }, []);
+
   function handleLogout() {
     localStorage.clear();
     setUserId("");
@@ -67,6 +102,8 @@ function App() {
       .then((response) => response.json())
       .then((json) => {
         setToken(json.token);
+        setStoredUsername(json.name);
+
         setUserId(json.id);
         setUserName(json.name);
         navigate("/collection");

@@ -15,6 +15,27 @@ function logError(error) {
 }
 
 module.exports = {
+  get: async function(request, result, next) {
+    try {
+      const username = request.params.username;
+
+      // Fetch the user.
+      const user = await User.findOne({ name: username });
+      if (!user) {
+        throw new Error("Failed to find user.");
+      }
+
+      result.json({
+        id: user._id,
+        name: user.name,
+        email: user.email
+      });
+    } catch (err) {
+      logError(`[get] ${err}`);
+      result.status(401).json({ error: `${err}` });
+    }
+  },
+
   // ====================================================================== //
   //
   // Attempts to log the user in.
@@ -58,7 +79,7 @@ module.exports = {
         email: user.email,
       });
     } catch (err) {
-      logError(err);
+      logError(`[login] ${err}`);
       result.status(401).json({ error: `${err}` });
     }
   },
@@ -105,7 +126,7 @@ module.exports = {
         email: newUser.email,
       });
     } catch (err) {
-      logError(err);
+      logError(`[signup] ${err}`);
       result.status(400).json({ error: `${err}` });
     }
   },
@@ -158,7 +179,7 @@ module.exports = {
         email: user.email,
       });
     } catch (err) {
-      logError(err);
+      logError(`[details] ${err}`);
       result.status(400).json({ error: `${err}` });
     }
   },

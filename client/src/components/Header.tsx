@@ -1,12 +1,19 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AppContext } from "../App";
 import Logout from "../auth/Logout";
 import User from "./User";
+import { verifyToken } from "../services/storage";
 
 function Header() {
   const context = useContext(AppContext);
-  const isLoggedIn = context && context.userName.length > 0;
+  const isLoggedIn = verifyToken() //context && context.userName.length > 0;
+
+  const [numCartItems, setNumCartItems] = useState<number>(0);
+
+  useEffect(() => {
+    setNumCartItems(context?.cartRecords?.length ?? 0);
+  }, [context?.cartRecords]);
 
   return (
     <header>
@@ -61,9 +68,9 @@ function Header() {
                 to={"/cart"}
                 className="btn btn-light bi bi-cart3 me-2 position-relative"
               >
-                {context?.cartRecords.length > 0 && (
+                {numCartItems > 0 && (
                   <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    {context.cartRecords.length}
+                    {numCartItems}
                     <span className="visually-hidden">Records in cart</span>
                   </span>
                 )}
