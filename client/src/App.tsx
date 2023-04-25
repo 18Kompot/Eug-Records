@@ -16,6 +16,8 @@ import "./App.css";
 import { TRecord } from "./pages/types";
 import Cart from "./pages/Cart";
 import RouteGuard from "./auth/RouteGuard";
+import Equipment from "./pages/Equipment";
+import Wrapper from "./components/Wrapper";
 
 interface ILoginData {
   email: string;
@@ -146,39 +148,42 @@ function App() {
           handleRemoveRecord: removeCartRecord,
         }}
       >
-        <Header />
         <ToastContainer />
-        <Routes>
-          <Route
-            path="/collection"
-            element={
-              <RouteGuard>
-                <Collection />
-              </RouteGuard>
-            }
-          />
-          <Route
-            path="/info/:id"
-            element={
-              <RouteGuard>
-                <Recordinfo />
-              </RouteGuard>
-            }
-          />
-          <Route
-            path="/cart"
-            element={
-              <RouteGuard>
-                <Cart />
-              </RouteGuard>
-            }
-          />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login handler={login} />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/password-reset" element={<Resetpass />} />
-          <Route path="/newpassword/:id/:token" element={<Newpass />} />
-        </Routes>
+        <Header />
+        <Wrapper>
+          <Routes>
+            <Route
+              path="/collection"
+              element={
+                <RouteGuard>
+                  <Collection />
+                </RouteGuard>
+              }
+            />
+            <Route
+              path="/info/:id"
+              element={
+                <RouteGuard>
+                  <Recordinfo />
+                </RouteGuard>
+              }
+            />
+            <Route
+              path="/cart"
+              element={
+                <RouteGuard>
+                  <Cart />
+                </RouteGuard>
+              }
+            />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/login" element={<Login handler={login} />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/equipment" element={<Equipment />} />
+            <Route path="/password-reset" element={<Resetpass />} />
+            <Route path="/newpassword/:id/:token" element={<Newpass />} />
+          </Routes>
+        </Wrapper>
         <footer className="d-flex flex-column mt-auto">
           <Footer />
         </footer>
