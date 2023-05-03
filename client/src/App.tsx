@@ -7,7 +7,12 @@ import Signup from "./auth/Signup";
 import Login from "./auth/Login";
 import { createContext, useEffect, useState } from "react";
 import { getRequest, postRequest } from "./services/api";
-import { getStoredUsername, setStoredUsername, setToken, verifyToken } from "./services/storage";
+import {
+  getStoredUsername,
+  setStoredUsername,
+  setToken,
+  verifyToken,
+} from "./services/storage";
 import { ToastContainer, toast } from "react-toastify";
 import Resetpass from "./auth/Resetpass";
 import Newpass from "./auth/Newpass";
@@ -18,6 +23,8 @@ import Cart from "./pages/Cart";
 import RouteGuard from "./auth/RouteGuard";
 import Equipment from "./pages/Equipment";
 import Wrapper from "./components/Wrapper";
+import Home from "./pages/Home";
+import Contact from "./pages/Contact";
 
 interface ILoginData {
   email: string;
@@ -75,7 +82,7 @@ function App() {
         setUserId(json.id);
         setUserName(json.name);
       });
-  }, []);
+  }, [navigate]);
 
   function handleLogout() {
     localStorage.clear();
@@ -91,7 +98,7 @@ function App() {
       progress: undefined,
       theme: "dark",
     });
-    navigate("/login");
+    navigate("/home");
   }
 
   function login(data: ILoginData) {
@@ -106,7 +113,7 @@ function App() {
 
         setUserId(json.id);
         setUserName(json.name);
-        navigate("/collection");
+        navigate("/home");
 
         toast.success(`Welcome back ${json.name}!`, {
           position: "top-center",
@@ -215,8 +222,10 @@ function App() {
             />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login handler={login} />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/equipment" element={<Equipment />} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="/password-reset" element={<Resetpass />} />
             <Route path="/newpassword/:id/:token" element={<Newpass />} />
           </Routes>

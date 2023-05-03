@@ -25,5 +25,6 @@ app.use("/", indexRouter);
 app.use("/records", auth, recordsRouter);
 app.use("/users", usersRouter);
 app.use("/password-reset", passwordReset);
+app.use("/contact-me", contactForm);
 
 module.exports = app;

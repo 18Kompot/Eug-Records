@@ -55,6 +55,20 @@
   margin-bottom: 10px;
 }
 
+#contact-form label {
+  font-weight: bold;
+  color: white;
+}
+#contact-form .form-group {
+  margin-bottom: 20px;
+}
+#contact-form .form-control {
+  border-radius: 0;
+}
+#contact-form button {
+  border-radius: 0;
+}
+
 /* .custom-pagination .page-link {
   border-radius: 50%;
   color: #555;

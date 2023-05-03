@@ -7,7 +7,7 @@ import { verifyToken } from "../services/storage";
 
 function Header() {
   const context = useContext(AppContext);
-  const isLoggedIn = verifyToken() //context && context.userName.length > 0;
+  const isLoggedIn = verifyToken(); //context && context.userName.length > 0;
 
   const [numCartItems, setNumCartItems] = useState<number>(0);
 
@@ -19,7 +19,7 @@ function Header() {
     <header>
       <nav className="container-fluid navbar bg-dark navbar-expand-lg bg-body-tertiary">
         <div className="col text-center">
-          <NavLink className="p-2 navbar-brand text-warning" to="/#">
+          <NavLink className="p-2 navbar-brand text-warning" to="/home">
             <img
               className=""
               src="https://images.squarespace-cdn.com/content/v1/518f36c0e4b062dc22411eae/1498528865052-FNAYYP1O31KOKZ7W8UYW/TRS-logo-recordplatter-one+colour+%281%29.png"
@@ -30,6 +30,9 @@ function Header() {
         </div>
         <div className="container">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <NavLink className="nav-link text-white" to="/home">
+              Home
+            </NavLink>
             <NavLink className="nav-link text-white" to="/about">
               About
             </NavLink>

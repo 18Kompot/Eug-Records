@@ -83,10 +83,6 @@ function Signup() {
 
                     <div className="mx-1 mx-md-4">
                       <div className="d-flex flex-row align-items-center mb-4">
-                        {/* <i
-                          className="bi bi-person me-3"
-                          style={{'font-size: 70px;'}}
-                        ></i> */}
                         <div className="form-outline text-secondary flex-fill mb-0">
                           <input
                             type="text"

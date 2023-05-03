@@ -22,7 +22,7 @@ function Footer() {
           <div className="col text-center">
             <p>CONTACT INFORMATION</p>
             <div className="col justify-content-end">
-              <Link target="_blank" to={""}>
+              <Link to="/contact">
                 <i className="mx-2 bi bi-envelope-at-fill fs-4"></i>
               </Link>
               <Link target="_blank" to={"https://www.youtube.com/18Compton"}>

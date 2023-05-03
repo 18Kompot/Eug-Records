@@ -92,3 +92,10 @@ export interface ISignupData {
   email: string;
   password: string;
 }
+
+export interface IContactData {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
