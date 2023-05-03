@@ -22,9 +22,9 @@ function Header() {
           <NavLink className="p-2 navbar-brand text-warning" to="/home">
             <img
               className=""
-              src="https://images.squarespace-cdn.com/content/v1/518f36c0e4b062dc22411eae/1498528865052-FNAYYP1O31KOKZ7W8UYW/TRS-logo-recordplatter-one+colour+%281%29.png"
-              alt="record"
-              height="76px"
+              src="/images/eugrec.png"
+              alt="logo"
+              height="96px"
             />
           </NavLink>
         </div>
@@ -42,7 +42,7 @@ function Header() {
               </NavLink>
             )}
             <NavLink className="nav-link text-white" to="/equipment">
-              My equipment
+              Equipment
             </NavLink>
             <NavLink className="nav-link text-white" to="/contact">
               Contact me

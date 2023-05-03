@@ -11,6 +11,7 @@ const indexRouter = require("./routes/index");
 const recordsRouter = require("./routes/records");
 const usersRouter = require("./routes/users");
 const passwordReset = require("./routes/passwordReset");
+const contactForm = require("./routes/contactForm");
 
 const app = express();
 

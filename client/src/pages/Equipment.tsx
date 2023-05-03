@@ -17,11 +17,7 @@ function Equipment() {
             far more expensive than it is.
           </p>
           <div className="col-sm-6">
-            <img
-              className="img-fluid"
-              src="https://i.imgur.com/4NqTxIh.png"
-              alt="turntable"
-            />
+            <img className="img-fluid" src="/images/sony.png" alt="turntable" />
           </div>
         </div>
       </div>
@@ -57,11 +53,7 @@ function Equipment() {
             best listening experience.
           </p>
           <div className="col-sm-6">
-            <img
-              className="img-fluid"
-              src="https://i.imgur.com/TzsIo79.png"
-              alt="preamp"
-            />
+            <img className="img-fluid" src="/images/ampapa.png" alt="preamp" />
           </div>
         </div>
       </div>
@@ -88,11 +80,7 @@ function Equipment() {
             digital optical, analog RCA and USB inputs, and a subwoofer output.
           </p>
           <div className="col-sm-6">
-            <img
-              className="img-fluid"
-              src="https://i.imgur.com/2y9WUxn.png"
-              alt="speakers"
-            />
+            <img className="img-fluid" src="/images/fives.png" alt="speakers" />
           </div>
         </div>
       </div>

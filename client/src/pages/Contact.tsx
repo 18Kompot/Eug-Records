@@ -115,7 +115,7 @@ function Contact() {
                     type="text"
                     className="form-control"
                     placeholder="Subject"
-                    value={subject}
+                    value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     required
                   />

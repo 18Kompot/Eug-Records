@@ -1,5 +1,7 @@
 import { useContext } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom"; // import Link from react-router-dom
+import { NavLink } from "react-router-dom"; // import NavLink from react-router
+
 import { AppContext } from "../App";
 
 function Footer() {
@@ -14,7 +16,7 @@ function Footer() {
           <div className="col text-center">
             <img
               className=""
-              src="https://images.squarespace-cdn.com/content/v1/518f36c0e4b062dc22411eae/1498528865052-FNAYYP1O31KOKZ7W8UYW/TRS-logo-recordplatter-one+colour+%281%29.png"
+              src="/images/eugrec.png"
               alt="record"
               height="100px"
             />
@@ -38,17 +40,23 @@ function Footer() {
           </div>
           <div className="col text-center">
             <p>SITE MAP</p>
-            <Link className="nav-link" to={`/about`}>
+            <NavLink className="nav-link" to={`/home`}>
+              Home
+            </NavLink>
+            <NavLink className="nav-link" to="/about">
               About
-            </Link>
+            </NavLink>
             {isLoggedIn && (
-              <NavLink className="nav-link text-white" to="/collection">
+              <NavLink className="nav-link" to="/collection">
                 Collection
               </NavLink>
             )}
-            <Link className="nav-link" to={`/equipment`}>
+            <NavLink className="nav-link" to={`/equipment`}>
               Equipment
-            </Link>
+            </NavLink>
+            <NavLink className="nav-link" to={`/contact`}>
+              Contact
+            </NavLink>
           </div>
         </div>
         <div className="container pt-2">
