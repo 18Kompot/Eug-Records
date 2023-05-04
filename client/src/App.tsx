@@ -36,6 +36,7 @@ interface Context {
   userName: string;
   handleLogout: Function;
   login: Function;
+  isAdmin: boolean;
   cartRecords: TRecord[];
   handleAddRecord: (record: TRecord) => void;
   handleRemoveRecord: (record: TRecord) => void;
@@ -47,6 +48,7 @@ function App() {
   const [userId, setUserId] = useState<string>("");
   const [userName, setUserName] = useState<string>("");
   const [cartRecords, setCartRecords] = useState<TRecord[]>([]);
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -82,12 +84,14 @@ function App() {
         setUserId(json.id);
         setUserName(json.name);
       });
-  }, [navigate]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function handleLogout() {
     localStorage.clear();
     setUserId("");
     setUserName("");
+    setIsAdmin(false);
     toast.error(`You successfully logged out`, {
       position: "top-center",
       autoClose: 2000,
@@ -110,7 +114,7 @@ function App() {
       .then((json) => {
         setToken(json.token);
         setStoredUsername(json.name);
-
+        setIsAdmin(json.isAdmin);
         setUserId(json.id);
         setUserName(json.name);
         navigate("/home");
@@ -187,6 +191,7 @@ function App() {
           userName,
           handleLogout,
           login,
+          isAdmin,
           cartRecords,
           handleAddRecord: addCartRecord,
           handleRemoveRecord: removeCartRecord,

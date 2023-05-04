@@ -131,7 +131,7 @@ function Signup() {
                             value={password}
                             onChange={(e) => setIsAdmin(e.target.checked)}
                           />
-                          <label>Password</label>
+                          <label>Wanna be an admin?</label>
                         </div>
                       </div>
 
