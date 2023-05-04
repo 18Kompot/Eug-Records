@@ -11,6 +11,7 @@ function Signup() {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [isAdmin, setIsAdmin] = useState(false);
 
   //todo: create an error componenet for this:
   //const [error, setError] = useState<string>("")
@@ -24,12 +25,14 @@ function Signup() {
         .max(256)
         .email({ tlds: { allow: false } }),
       password: Joi.string().required().min(6).max(30),
+      isAdmin: Joi.boolean(),
     });
 
     const { error, value } = schema.validate({
       name,
       email,
       password,
+      isAdmin,
     });
 
     if (error) {
@@ -120,6 +123,18 @@ function Signup() {
                           <label>Password</label>
                         </div>
                       </div>
+                      <div className="d-flex flex-row align-items-center mb-4">
+                        <div className="form-outline text-secondary flex-fill mb-0">
+                          <input
+                            type="checkbox"
+                            className="form-control form-check-input"
+                            value={password}
+                            onChange={(e) => setIsAdmin(e.target.checked)}
+                          />
+                          <label>Password</label>
+                        </div>
+                      </div>
+
                       <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                         <button
                           type="button"

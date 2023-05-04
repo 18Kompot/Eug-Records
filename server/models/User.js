@@ -20,11 +20,11 @@ const userSchema = new mongoose.Schema({
     minlength: 6,
     maxlength: 1024,
   },
-  // isAdmin: {
-  //     type: Boolean,
-  //     default: false,
-  //     required: true,
-  // }
+  isAdmin: {
+    type: Boolean,
+    default: false,
+    required: true,
+  },
 });
 
 const User = mongoose.model("User", userSchema);

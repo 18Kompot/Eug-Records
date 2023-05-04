@@ -15,7 +15,7 @@ function logError(error) {
 }
 
 module.exports = {
-  get: async function(request, result, next) {
+  get: async function (request, result, next) {
     try {
       const username = request.params.username;
 
@@ -28,7 +28,7 @@ module.exports = {
       result.json({
         id: user._id,
         name: user.name,
-        email: user.email
+        email: user.email,
       });
     } catch (err) {
       logError(`[get] ${err}`);
@@ -77,6 +77,7 @@ module.exports = {
         id: user._id,
         name: user.name,
         email: user.email,
+        isAdmin: user.isAdmin,
       });
     } catch (err) {
       logError(`[login] ${err}`);
@@ -96,6 +97,7 @@ module.exports = {
         name: joi.string().required().min(2).max(256),
         email: joi.string().min(6).max(256).required().email(),
         password: joi.string().min(6).max(1024).required(),
+        isAdmin: joi.boolean(),
       });
 
       const { error, value } = schema.validate(request.body);
@@ -115,6 +117,7 @@ module.exports = {
         name: value.name,
         email: value.email,
         password: hash,
+        isAdmin: value.isAdmin,
       });
       await newUser.save();
 
@@ -124,6 +127,7 @@ module.exports = {
         id: newUser._id,
         name: newUser.name,
         email: newUser.email,
+        isAdmin: newUser.isAdmin,
       });
     } catch (err) {
       logError(`[signup] ${err}`);
@@ -177,6 +181,7 @@ module.exports = {
         id: user._id,
         name: user.name,
         email: user.email,
+        isAdmin: user.isAdmin,
       });
     } catch (err) {
       logError(`[details] ${err}`);
