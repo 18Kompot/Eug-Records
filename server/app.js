@@ -12,6 +12,7 @@ const recordsRouter = require("./routes/records");
 const usersRouter = require("./routes/users");
 const passwordReset = require("./routes/passwordReset");
 const contactForm = require("./routes/contactForm");
+const pages = require("./routes/pages");
 
 const app = express();
 
@@ -27,5 +28,6 @@ app.use("/records", auth, recordsRouter);
 app.use("/users", usersRouter);
 app.use("/password-reset", passwordReset);
 app.use("/contact-me", contactForm);
+app.use("/pages", pages);
 
 module.exports = app;

@@ -1,98 +1,37 @@
+
 const { Page } = require("../models/Page");
 const joi = require("joi");
 
 module.exports = {
-  getAll: async function (req, res, next) {
-    try {
-      const result = await Page.find({}).sort({ content: 1 });
-      res.json(result);
-    } catch (err) {
-      console.log(err);
-      res.status(400).json({ error: "error getting the page" });
-    }
-  },
-
   getPage: async function (req, res, next) {
     try {
-      const scheme = joi.object({
-        _id: joi.string().required(),
-      });
+      const name = req.params.name;
+      const page = await Page.findOne({ name: name });
 
-      const { error, value } = scheme.validate({ _id: req.params.id });
-
-      if (error) {
-        console.log(error.details[0].message);
-        res.status(400).json({ error: "invalid data" });
-        return;
+      if (!page) {
+        throw new Error("Failed to find page content.");
       }
 
-      const result = await Page.findOne({ _id: value._id });
-      res.json(result);
+      res.json({
+        content: page.content
+      });
     } catch (err) {
       console.log(err);
       res.status(400).json({ error: "error getting the page" });
-    }
-  },
-
-  add: async function (req, res, next) {
-    try {
-      const scheme = joi.object({
-        content: joi.string().required(),
-      });
-
-      const { error, value } = scheme.validate(req.body);
-
-      if (error) {
-        console.log(error.details[0].message);
-        res.status(400).json({ error: "invalid data" });
-        return;
-      }
-
-      const newPage = new Page(value);
-      const result = await newPage.save();
-
-      res.json({
-        ...value,
-        _id: result._id,
-      });
-    } catch (err) {
-      console.log(err);
-      res.status(400).json({ error: "error adding a page" });
-    }
-  },
-
-  delete: async function (req, res, next) {
-    try {
-      const scheme = joi.object({
-        _id: joi.string().required(),
-      });
-
-      const { error, value } = scheme.validate({ _id: req.params.id });
-
-      if (error) {
-        console.log(error.details[0].message);
-        res.status(400).json({ error: "invalid data" });
-        return;
-      }
-
-      const deleted = await Page.findOne({ _id: value._id });
-
-      await Page.deleteOne(value).exec();
-      res.json(deleted);
-    } catch (err) {
-      console.log(err);
-      res.status(400).json({ error: "error deleting a page" });
     }
   },
 
   edit: async function (req, res, next) {
     try {
+      console.log(`[pages.edit] TOP`);
+
       const scheme = joi.object({
-        content: joi.string().required(),
+        content: joi.string().required().allow("")
       });
 
-      const { error, value } = scheme.validate(req.body);
+      console.log(`[pages.edit] req: ${req}`);
 
+      const { error, value } = scheme.validate(req.body);
       if (error) {
         console.log(error.details[0].message);
         res.status(400).json({ error: "invalid data" });
@@ -101,15 +40,15 @@ module.exports = {
 
       const page = await Page.findOneAndUpdate(
         {
-          _id: req.params.id,
+          name: req.params.name,
         },
-        value
+        { $set: { content: value.content } }
       );
 
-      if (!page) return res.status(404).send("Given ID was not found.");
+      if (!page) return res.status(404).send("Given page name was not found.");
 
-      const updated = await Page.findOne({ _id: req.params.id });
-      res.json(updated);
+      console.log("Page found. (status: 200)");
+      res.status(200).json({ status: 200 });
     } catch (err) {
       console.log(err);
       res.status(400).json({ error: "failed to update data" });
