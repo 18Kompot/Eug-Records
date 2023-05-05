@@ -82,6 +82,7 @@ function App() {
         }
 
         setUserId(json.id);
+        setIsAdmin(json.isAdmin);
         setUserName(json.name);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
