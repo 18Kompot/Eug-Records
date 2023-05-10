@@ -150,7 +150,11 @@ function Contact() {
               required
             ></textarea>
           </div>
-          <button type="submit" onClick={submit} className="btn btn-primary">
+          <button
+            type="submit"
+            onClick={submit}
+            className="btn btn-primary mb-5"
+          >
             Submit
           </button>
         </div>
