@@ -2,6 +2,7 @@ import Title from "../components/Title";
 import Joi from "joi";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
 
 interface Props {
   handler: Function;
@@ -31,8 +32,16 @@ function Login({ handler }: Props) {
     });
 
     if (error) {
-      //   setError(error.message);
-      console.log(error.message);
+      toast.error(error.message, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+        theme: "dark",
+      });
       return;
     }
     handler(value);

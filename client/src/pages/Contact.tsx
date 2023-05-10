@@ -3,12 +3,20 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { postRequest } from "../services/api";
 import { IContactData } from "./types";
+import Title from "../components/Title";
 
 function Contact() {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [subject, setSubject] = useState<string>("");
   const [message, setMessage] = useState<string>("");
+
+  const clearForm = () => {
+    setName("");
+    setEmail("");
+    setSubject("");
+    setMessage("");
+  };
 
   function submit() {
     const schema = Joi.object().keys({
@@ -31,10 +39,30 @@ function Contact() {
 
     if (error) {
       //   setError(error.message);
-      console.log(error.message);
+      toast.error(error.message, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+        theme: "dark",
+      });
       return;
     }
     sendForm(value);
+    toast.success("Form sent successfully", {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "light",
+    });
+    clearForm();
   }
 
   function sendForm(data: IContactData) {
@@ -56,80 +84,76 @@ function Contact() {
           });
           return;
         }
-        toast.success("Form sent successfully", {
-          position: "top-center",
-          autoClose: 2000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: false,
-          progress: undefined,
-          theme: "light",
-        });
       });
   }
 
   return (
     <>
-      <div className="row d-flex justify-content-center align-items-center">
-        <div className="col-lg-12 col-xl-11">
-          <div className="p-md-5">
-            <div className="row justify-content-center">
-              <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-                <div className="form-group">
-                  <label>Name:</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label>Email:</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label>Subject:</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Subject"
-                    value={subject}
-                    onChange={(e) => setSubject(e.target.value)}
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label>Message:</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Subject"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    required
-                  />
-                </div>
-                <button
-                  type="submit"
-                  onClick={submit}
-                  className="btn btn-primary"
-                >
-                  Submit
-                </button>
-              </div>
-            </div>
+      <Title main={<>Contact form</>} sub={<></>} />
+      <div className="row justify-content-center">
+        <div className="col-md-10 col-lg-6 col-xl-5">
+          <div className="mb-3">
+            <label htmlFor="name" className="form-label text-white">
+              Name:
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="name"
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
           </div>
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label text-white">
+              Email:
+            </label>
+            <input
+              type="email"
+              className="form-control"
+              id="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="subject" className="form-label text-white">
+              Subject:
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="subject"
+              placeholder="Subject"
+              value={subject}
+              onChange={(e) => setSubject(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label
+              htmlFor="message"
+              className="form-label text-white"
+              id="message-label"
+            >
+              Message:
+            </label>
+            <textarea
+              className="form-control"
+              id="message"
+              placeholder="Message"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              required
+            ></textarea>
+          </div>
+          <button type="submit" onClick={submit} className="btn btn-primary">
+            Submit
+          </button>
         </div>
       </div>
     </>

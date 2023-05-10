@@ -11,15 +11,17 @@ function Footer() {
 
   return (
     <>
-      <div className="container-fluid text-light bg-dark opacity-40 py-4">
+      <div className="container-fluid justify-content-between text-light bg-dark opacity-40 py-4">
         <div className="row">
           <div className="col text-center">
-            <img
-              className=""
-              src="/images/eugrec.png"
-              alt="record"
-              height="100px"
-            />
+            <NavLink className="p-2 navbar-brand text-warning" to="/home">
+              <img
+                className=""
+                src="/images/eugrec.png"
+                alt="record"
+                height="100px"
+              />
+            </NavLink>
           </div>
           <div className="col text-center">
             <p>CONTACT INFORMATION</p>

@@ -17,7 +17,7 @@ function Newpass() {
       .then((res) => res.json())
       .then((json) => {
         if (json.ok === false) {
-          setError("error get the data");
+          setError("error to get the data");
           return;
         }
 

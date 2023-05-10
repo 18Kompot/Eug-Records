@@ -18,91 +18,107 @@ function Header() {
   return (
     <header>
       <nav className="container-fluid navbar bg-dark navbar-expand-lg bg-body-tertiary">
-        <div className="col text-center">
-          <NavLink className="p-2 navbar-brand text-warning" to="/home">
-            <img
-              className=""
-              src="/images/eugrec.png"
-              alt="logo"
-              height="96px"
-            />
-          </NavLink>
-        </div>
-        <div className="container">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <NavLink className="nav-link text-white" to="/home">
-              Home
+        <div className="container d-flex justify-content-between align-items-center">
+          <div className="col">
+            <NavLink className="p-2 navbar-brand text-warning" to="/home">
+              <img
+                className=""
+                src="/images/eugrec.png"
+                alt="logo"
+                height="96px"
+              />
             </NavLink>
-            <NavLink className="nav-link text-white" to="/about">
-              About
-            </NavLink>
-            {isLoggedIn && (
-              <NavLink className="nav-link text-white" to="/collection">
-                Collection
-              </NavLink>
-            )}
-            <NavLink className="nav-link text-white" to="/equipment">
-              Equipment
-            </NavLink>
-            <NavLink className="nav-link text-white" to="/contact">
-              Contact me
-            </NavLink>
-          </ul>
-        </div>
-        {!isLoggedIn && (
-          <>
-            <span className="d-flex nav-item text-warning me-1">
-              <NavLink className="nav-link" aria-current="page" to="/login">
-                Login
-              </NavLink>
-            </span>
-            <span className="d-flex nav-item text-white me-1">or</span>
-            <span className="d-flex nav-item text-warning">
-              <NavLink className="nav-link" aria-current="page" to="/signup">
-                Create an account
-              </NavLink>
-            </span>
-          </>
-        )}
-        {isLoggedIn && (
-          <>
-            <div className="dropdown position-relative me-3">
-              <Link
-                to={"/cart"}
-                className="btn btn-light bi bi-cart3 me-2 position-relative"
-              >
-                {numCartItems > 0 && (
-                  <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    {numCartItems}
-                    <span className="visually-hidden">Records in cart</span>
-                  </span>
-                )}
-              </Link>
-              <button
-                className="btn btn-info dropdown-toggle"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <User />
-              </button>
-
-              <ul
-                className="dropdown-menu position-absolute top-100 start-0 w-100"
-                style={{ margin: 0 }}
-              >
-                <li>
-                  <NavLink className="nav-item" to="/favorites">
-                    <span className="btn">Favorites</span>
+          </div>
+          <div className="col d-flex align-items-center">
+            <ul className="navbar-nav">
+              <li className="nav-item">
+                <NavLink className="nav-link text-white" to="/home">
+                  Home
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link text-white" to="/about">
+                  About
+                </NavLink>
+              </li>
+              {isLoggedIn && (
+                <li className="nav-item">
+                  <NavLink className="nav-link text-white" to="/collection">
+                    Collection
                   </NavLink>
                 </li>
-                <li className="nav-item">
-                  <Logout />
-                </li>
-              </ul>
+              )}
+              <li className="nav-item">
+                <NavLink className="nav-link text-white" to="/equipment">
+                  Equipment
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link text-white" to="/contact">
+                  Contact me
+                </NavLink>
+              </li>
+            </ul>
+            <div className="ms-auto d-flex align-items-center">
+              {!isLoggedIn && (
+                <>
+                  <span className="nav-item text-warning me-1">
+                    <NavLink
+                      className="nav-link"
+                      aria-current="page"
+                      to="/login"
+                    >
+                      Login
+                    </NavLink>
+                  </span>
+                  <span className="nav-item text-white me-1">or</span>
+                  <span className="nav-item text-warning">
+                    <NavLink
+                      className="nav-link"
+                      aria-current="page"
+                      to="/signup"
+                    >
+                      Create an account
+                    </NavLink>
+                  </span>
+                </>
+              )}
             </div>
-          </>
-        )}
+            {isLoggedIn && (
+              <div className="d-flex align-items-center">
+                <Link
+                  to={"/cart"}
+                  className="btn btn-light bi bi-cart3 me-2 position-relative"
+                >
+                  {numCartItems > 0 && (
+                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                      {numCartItems}
+                      <span className="visually-hidden">Records in cart</span>
+                    </span>
+                  )}
+                </Link>
+                <button
+                  className="btn btn-info dropdown-toggle"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <User />
+                </button>
+                <ul
+                  className="dropdown-menu dropdown-menu-end"
+                  style={{ margin: 0 }}
+                >
+                  <li className="nav-item">
+                    <div className="d-flex align-items-center">
+                      <Logout />
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
+        </div>
       </nav>
     </header>
   );
