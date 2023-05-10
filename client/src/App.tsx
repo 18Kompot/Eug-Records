@@ -1,6 +1,6 @@
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Collection from "./pages/Collection";
 import About from "./pages/About";
 import Signup from "./auth/Signup";
@@ -50,8 +50,13 @@ function App() {
   const [cartRecords, setCartRecords] = useState<TRecord[]>([]);
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
+    if (location.pathname.startsWith("/newpassword")) {
+      return;
+    }
+
     const isValidToken = verifyToken();
     if (!isValidToken) {
       localStorage.clear();

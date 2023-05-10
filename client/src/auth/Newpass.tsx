@@ -50,7 +50,7 @@ function Newpass() {
 
   function editPass(data: { id?: string; token?: string; password: string }) {
     console.log(id, token);
-    const res = postRequest(`password-reset/newpassword`, data);
+    const res = postRequest("password-reset/newpassword", data, false);
     if (!res) return;
 
     res

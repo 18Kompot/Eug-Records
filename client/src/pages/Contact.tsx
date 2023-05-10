@@ -18,7 +18,7 @@ function Contact() {
     setMessage("");
   };
 
-  function submit() {
+  const submit = () => {
     const schema = Joi.object().keys({
       name: Joi.string().required().min(2).max(256),
       email: Joi.string()
@@ -51,23 +51,10 @@ function Contact() {
       });
       return;
     }
-    sendForm(value);
-    toast.success("Form sent successfully", {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: false,
-      progress: undefined,
-      theme: "light",
-    });
-    clearForm();
-  }
 
-  function sendForm(data: IContactData) {
-    const res = postRequest("contact-me/contact", data, false);
+    const res = postRequest("contact-me/contact", value, false);
     if (!res) return;
+
     res
       .then((response) => response.json())
       .then((json) => {
@@ -85,6 +72,18 @@ function Contact() {
           return;
         }
       });
+
+    toast.success("Form sent successfully", {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "light",
+    });
+    clearForm();
   }
 
   return (

@@ -38,14 +38,18 @@ module.exports = {
         return;
       }
 
-      const page = await Page.findOneAndUpdate(
+      let page = await Page.findOneAndUpdate(
         {
           name: req.params.name,
         },
         { $set: { content: value.content } }
       );
 
-      if (!page) return res.status(404).send("Given page name was not found.");
+      // The page doesn't exist yet. Make it. The user has edited the page.
+      if (!page) {
+        page = new Page({ name: req.params.name, content: value.content });
+        await page.save();
+      }
 
       console.log("Page found. (status: 200)");
       res.status(200).json({ status: 200 });
