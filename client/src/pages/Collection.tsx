@@ -1,4 +1,3 @@
-
 import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import Search from "../components/Search";
@@ -11,7 +10,7 @@ import { Pagination } from "react-bootstrap";
 enum SortBy {
   None,
   DateAdded,
-  Alphabetically
+  Alphabetically,
 }
 
 function Collection() {
@@ -19,9 +18,6 @@ function Collection() {
   const [record, setRecord] = useState<TRecord[]>([]);
   const [shownRecords, setShownRecords] = useState<Array<TRecord>>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
-
-  // Filter states
-  const [sortBy, setSortBy] = useState<SortBy>(SortBy.None);
 
   const itemsPerPage = 15;
   const totalPages = Math.ceil(shownRecords.length / itemsPerPage);
@@ -44,12 +40,12 @@ function Collection() {
   function applySort(sortBy: SortBy, inverse: boolean) {
     let sortedRecords: Array<TRecord> = [];
 
-    // Deep copy the record array. We need to deep copy because .sort below 
+    // Deep copy the record array. We need to deep copy because .sort below
     // alters the contents array.
     record.forEach((rec) => {
       sortedRecords.push(Object.assign({}, rec));
     });
-    
+
     sortedRecords.sort((recordLeft: TRecord, recordRight: TRecord) => {
       let sortValue = 0;
 
@@ -87,7 +83,6 @@ function Collection() {
     });
 
     setShownRecords(sortedRecords);
-    setSortBy(sortBy);
   }
 
   function handleSearch(input: string) {
@@ -143,19 +138,31 @@ function Collection() {
       <Title main={<>My record collection</>} sub={<></>} />
       <div className="container">
         <div className="d-flex flex-row justify-content-end mb-2">
-          <button className="btn btn-outline-light me-2" onClick={ _ => applySort(SortBy.Alphabetically, false) }>
+          <button
+            className="btn btn-outline-light me-2"
+            onClick={(_) => applySort(SortBy.Alphabetically, false)}
+          >
             <i className="bi bi-sort-alpha-down"></i>
           </button>
 
-          <button className="btn btn-outline-light me-2" onClick={ _ => applySort(SortBy.Alphabetically, true) }>
+          <button
+            className="btn btn-outline-light me-2"
+            onClick={(_) => applySort(SortBy.Alphabetically, true)}
+          >
             <i className="bi bi-sort-alpha-up"></i>
           </button>
 
-          <button className="btn btn-outline-light me-2" onClick={ _ => applySort(SortBy.DateAdded, false) }>
+          <button
+            className="btn btn-outline-light me-2"
+            onClick={(_) => applySort(SortBy.DateAdded, false)}
+          >
             <i className="bi bi-sort-numeric-down"></i>
           </button>
 
-          <button className="btn btn-outline-light" onClick={ _ => applySort(SortBy.DateAdded, true) }>
+          <button
+            className="btn btn-outline-light"
+            onClick={(_) => applySort(SortBy.DateAdded, true)}
+          >
             <i className="bi bi-sort-numeric-up"></i>
           </button>
         </div>

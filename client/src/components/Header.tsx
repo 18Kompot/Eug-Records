@@ -4,6 +4,7 @@ import { AppContext } from "../App";
 import Logout from "../auth/Logout";
 import User from "./User";
 import { verifyToken } from "../services/storage";
+import { Dropdown } from "react-bootstrap";
 
 function Header() {
   const context = useContext(AppContext);
@@ -97,24 +98,17 @@ function Header() {
                     </span>
                   )}
                 </Link>
-                <button
-                  className="btn btn-info dropdown-toggle"
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  <User />
-                </button>
-                <ul
-                  className="dropdown-menu dropdown-menu-end"
-                  style={{ margin: 0 }}
-                >
-                  <li className="nav-item">
-                    <div className="d-flex align-items-center">
+                <Dropdown>
+                  <Dropdown.Toggle variant="info" id="dropdown-basic">
+                    <User />
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu>
+                    <Dropdown.Item as="button">
                       <Logout />
-                    </div>
-                  </li>
-                </ul>
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
               </div>
             )}
           </div>

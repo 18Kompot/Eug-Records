@@ -2,7 +2,6 @@ import Joi from "joi";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { postRequest } from "../services/api";
-import { IContactData } from "./types";
 import Title from "../components/Title";
 
 function Contact() {
@@ -84,7 +83,7 @@ function Contact() {
       theme: "light",
     });
     clearForm();
-  }
+  };
 
   return (
     <>

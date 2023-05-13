@@ -99,7 +99,7 @@ function App() {
     setUserName("");
     setIsAdmin(false);
     toast.error(`You successfully logged out`, {
-      position: "top-center",
+      position: "top-right",
       autoClose: 2000,
       hideProgressBar: true,
       closeOnClick: true,
@@ -126,7 +126,7 @@ function App() {
         navigate("/home");
 
         toast.success(`Welcome back ${json.name}!`, {
-          position: "top-center",
+          position: "top-right",
           autoClose: 2000,
           hideProgressBar: true,
           closeOnClick: true,

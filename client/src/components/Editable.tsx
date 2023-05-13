@@ -1,5 +1,5 @@
-import { PropsWithChildren, useContext, useEffect, useState } from "react";
-import { renderToPipeableStream, renderToStaticMarkup, renderToString } from 'react-dom/server';
+import { useContext, useEffect, useState } from "react";
+import { renderToString } from "react-dom/server";
 
 import { getRequest, postRequest } from "../services/api";
 import { toast } from "react-toastify";
@@ -16,7 +16,7 @@ export default function Editable(props: IEditableProps) {
   const admin = context && context.isAdmin;
 
   // The server is asked for the page's content. When the server returns 404,
-  // meaning the page doesn't exist in the database, then the default HTML is 
+  // meaning the page doesn't exist in the database, then the default HTML is
   // used and wasEdited (this state) remains false.
   const [wasEdited, setWasEdited] = useState<boolean>(false);
 
@@ -47,8 +47,8 @@ export default function Editable(props: IEditableProps) {
         return response.json();
       })
       .then((json: { content: string }) => {
-        // The input object (json) is undefined when the server can't find the 
-        // page in the database. When this is the case, we need to show the 
+        // The input object (json) is undefined when the server can't find the
+        // page in the database. When this is the case, we need to show the
         // default.
         const hasData = json !== undefined;
 
@@ -79,7 +79,16 @@ export default function Editable(props: IEditableProps) {
         return;
       }
 
-      toast.success(`Page ${props.name} updated!`);
+      toast.success(`You made adjustments to the ${props.name} page`, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+        theme: "light",
+      });
       setIsEditing(false);
       setEditContent("");
       setContent(editContent);
@@ -99,10 +108,12 @@ export default function Editable(props: IEditableProps) {
       return "";
     }
 
-    // Turn props.children, which has the "ReactNode" type, into a bunch of 
+    // Turn props.children, which has the "ReactNode" type, into a bunch of
     // JSXElement objects. We can turn JSXElement objects into a string. We
     // can't turn ReactNode objects into strings.
-    return renderToString(React.createElement(React.Fragment, null, props.children));
+    return renderToString(
+      React.createElement(React.Fragment, null, props.children)
+    );
   }
 
   return (
@@ -125,7 +136,7 @@ export default function Editable(props: IEditableProps) {
             <div className="row" style={{ height: "500px" }}>
               <textarea
                 onChange={(e) => onContentChanged(e.target.value)}
-                value={ editContent }
+                value={editContent}
               />
             </div>
 

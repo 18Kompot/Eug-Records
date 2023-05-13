@@ -73,6 +73,21 @@
   border-radius: 0;
 }
 
+.carousel-container {
+  width: 1600px;
+  height: 400px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.carousel-image {
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+}
+
 /* .custom-pagination .page-link {
   border-radius: 50%;
   color: #555;
