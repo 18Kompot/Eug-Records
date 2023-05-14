@@ -14,7 +14,7 @@ function Footer() {
       <div className="container-fluid justify-content-between text-light bg-dark opacity-40 py-4">
         <div className="row">
           <div className="col text-center">
-            <NavLink className="p-2 navbar-brand text-warning" to="/home">
+            <NavLink className="p-2 navbar-brand text-warning" to="/">
               <img
                 className=""
                 src="/images/eugrec.png"
@@ -42,7 +42,7 @@ function Footer() {
           </div>
           <div className="col text-center">
             <p>SITE MAP</p>
-            <NavLink className="nav-link" to={`/home`}>
+            <NavLink className="nav-link" to={`/`}>
               Home
             </NavLink>
             <NavLink className="nav-link" to="/about">

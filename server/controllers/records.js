@@ -15,7 +15,6 @@ module.exports = {
 
   details: async function (request, result, next) {
     try {
-      const client = request.client;
       var db = new Discogs().database();
       const id = parseInt(request.params.id);
       db.getRelease(id, function (err, data) {

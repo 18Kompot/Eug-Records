@@ -25,8 +25,17 @@ const handleRequest = (
   return fetch(url, config);
 };
 
-export const getRequest = (endPoint: string): Promise<Response> | null => {
-  return handleRequest(`${serverUrl}${endPoint}`, "GET");
+export const getRequest = (
+  endPoint: string,
+  checkToken: boolean = true
+): Promise<Response> | null => {
+  return handleRequest(
+    `${serverUrl}${endPoint}`,
+    "GET",
+    undefined,
+    undefined,
+    checkToken
+  );
 };
 
 export const postRequest = (

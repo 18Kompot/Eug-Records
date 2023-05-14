@@ -11,7 +11,10 @@ module.exports = (req, res, next) => {
     return;
   }
   try {
-    req.token = jwt.verify(token, config.jwt_token);
+    req.token = jwt.verify(token, config.jwt_token, {
+      maxAge: "7d",
+    });
+
     req.client = new discogs({ userToken: config.discogs_token });
     next();
   } catch (err) {

@@ -34,7 +34,7 @@ export default function Editable(props: IEditableProps) {
   // This effect is executed when the page loads. We request the page's content
   // from the server.
   useEffect(() => {
-    const res = getRequest(`pages/${props.name}`);
+    const res = getRequest(`pages/${props.name}`, false);
     if (!res) {
       return;
     }

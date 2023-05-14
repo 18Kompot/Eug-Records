@@ -1,12 +1,12 @@
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Collection from "./pages/Collection";
 import About from "./pages/About";
 import Signup from "./auth/Signup";
 import Login from "./auth/Login";
 import { createContext, useEffect, useState } from "react";
-import { getRequest, postRequest } from "./services/api";
+import { deleteRequest, getRequest, postRequest } from "./services/api";
 import {
   getStoredUsername,
   setStoredUsername,
@@ -50,17 +50,11 @@ function App() {
   const [cartRecords, setCartRecords] = useState<TRecord[]>([]);
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
   const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
-    if (location.pathname.startsWith("/newpassword")) {
-      return;
-    }
-
     const isValidToken = verifyToken();
     if (!isValidToken) {
       localStorage.clear();
-      navigate("/login");
       return;
     }
 
@@ -68,7 +62,6 @@ function App() {
     if (!res) {
       // The user's data could not be retrieved. Demand them to log in again?
       localStorage.clear();
-      navigate("/login");
       return;
     }
 
@@ -76,7 +69,6 @@ function App() {
       .then((response) => {
         if (!response.ok) {
           localStorage.clear();
-          navigate("/login");
           return;
         }
         return response.json();
@@ -98,6 +90,7 @@ function App() {
     setUserId("");
     setUserName("");
     setIsAdmin(false);
+    setCartRecords([]);
     toast.error(`You successfully logged out`, {
       position: "top-right",
       autoClose: 2000,
@@ -108,7 +101,7 @@ function App() {
       progress: undefined,
       theme: "dark",
     });
-    navigate("/home");
+    navigate("/");
   }
 
   function login(data: ILoginData) {
@@ -123,7 +116,24 @@ function App() {
         setIsAdmin(json.isAdmin);
         setUserId(json.id);
         setUserName(json.name);
-        navigate("/home");
+        navigate("/");
+
+        const res = getRequest(`cart/${json.id}`);
+        if (!res) {
+          return;
+        }
+
+        res
+          .then((response) => {
+            if (!response.ok) {
+              return;
+            }
+            return response.json();
+          })
+          .then((json: { records: TRecord[] }) => {
+            console.log(json.records.length);
+            setCartRecords(json.records);
+          });
 
         toast.success(`Welcome back ${json.name}!`, {
           position: "top-right",
@@ -168,25 +178,65 @@ function App() {
         theme: "light",
       }
     );
-    setCartRecords([...cartRecords, record]);
+    const res = postRequest(`cart/add/${userId}/${record.id}`, {});
+    if (!res) return;
+    res
+      .then((response) => response.json())
+      .then((json) => {
+        if (json.error) {
+          toast.error(json.error, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            progress: undefined,
+            theme: "dark",
+          });
+          return;
+        }
+        setCartRecords([...cartRecords, record]);
+      });
   }
 
   function removeCartRecord(record: TRecord) {
-    let remainingRecords = cartRecords.filter((r) => r.id !== record.id);
-    toast.error(
-      `${record.basic_information.artists[0].name} - ${record.basic_information.title}  removed from cart`,
-      {
-        position: "top-center",
-        autoClose: 2000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: false,
-        progress: undefined,
-        theme: "dark",
-      }
-    );
-    setCartRecords(remainingRecords);
+    const res = deleteRequest(`cart/${userId}/${record.id}`);
+    if (!res) {
+      return;
+    }
+    res
+      .then((response) => response.json())
+      .then((json) => {
+        if (json.error) {
+          toast.error(json.error, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            progress: undefined,
+            theme: "dark",
+          });
+          return;
+        }
+        let remainingRecords = cartRecords.filter((r) => r.id !== record.id);
+        toast.error(
+          `${record.basic_information.artists[0].name} - ${record.basic_information.title}  removed from cart`,
+          {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            progress: undefined,
+            theme: "dark",
+          }
+        );
+        setCartRecords(remainingRecords);
+      });
   }
 
   return (
@@ -233,7 +283,7 @@ function App() {
             />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login handler={login} />} />
-            <Route path="/home" element={<Home />} />
+            <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/equipment" element={<Equipment />} />
             <Route path="/contact" element={<Contact />} />

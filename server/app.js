@@ -13,6 +13,7 @@ const usersRouter = require("./routes/users");
 const passwordReset = require("./routes/passwordReset");
 const contactForm = require("./routes/contactForm");
 const pages = require("./routes/pages");
+const cart = require("./routes/cart");
 
 const app = express();
 
@@ -29,5 +30,6 @@ app.use("/users", usersRouter);
 app.use("/password-reset", passwordReset);
 app.use("/contact-me", contactForm);
 app.use("/pages", pages);
+app.use("/cart", cart);
 
 module.exports = app;

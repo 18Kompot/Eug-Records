@@ -71,7 +71,7 @@ module.exports = {
       }
 
       const param = { email: value.email };
-      const token = jwt.sign(param, config.jwt_token, { expiresIn: "72800s" });
+      const token = jwt.sign(param, config.jwt_token, { expiresIn: "7d" });
 
       result.json({
         token: token,

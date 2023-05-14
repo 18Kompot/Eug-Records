@@ -21,7 +21,7 @@ function Header() {
       <nav className="container-fluid navbar bg-dark navbar-expand-lg bg-body-tertiary">
         <div className="container d-flex justify-content-between align-items-center">
           <div className="col">
-            <NavLink className="p-2 navbar-brand text-warning" to="/home">
+            <NavLink className="p-2 navbar-brand text-warning" to="/">
               <img
                 className=""
                 src="/images/eugrec.png"
@@ -33,7 +33,7 @@ function Header() {
           <div className="col d-flex align-items-center">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <NavLink className="nav-link text-white" to="/home">
+                <NavLink className="nav-link text-white" to="/">
                   Home
                 </NavLink>
               </li>
