@@ -89,7 +89,7 @@ function Header() {
               <div className="d-flex align-items-center">
                 <Link
                   to={"/cart"}
-                  className="btn btn-light bi bi-cart3 me-2 position-relative"
+                  className="btn btn-light bi bi-cart3 me-3 position-relative"
                 >
                   {numCartItems > 0 && (
                     <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
