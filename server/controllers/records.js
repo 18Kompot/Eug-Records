@@ -1,11 +1,20 @@
 const Discogs = require("disconnect").Client;
+const fs = require('fs');
 
 module.exports = {
   list: async function (request, result, next) {
     try {
-      const client = request.client;
-      var col = client.user().collection();
+      var col = request.client.user().collection();
       col.getReleases("Primo18", 0, function (err, data) {
+
+        // fs.writeFile('./records.json', JSON.stringify(data), (err) => {
+        //   if (err) {
+        //     console.error(err);
+        //   }
+        //   // file written successfully
+        // });
+        
+
         result.json(data);
       });
     } catch (err) {

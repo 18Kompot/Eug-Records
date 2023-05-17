@@ -18,7 +18,7 @@ import Resetpass from "./auth/Resetpass";
 import Newpass from "./auth/Newpass";
 import Recordinfo from "./pages/Recordinfo";
 import "./App.css";
-import { TRecord } from "./pages/types";
+import { InfoData, TBasicInformation, TRecord } from "./pages/types";
 import Cart from "./pages/Cart";
 import RouteGuard from "./auth/RouteGuard";
 import Equipment from "./pages/Equipment";
@@ -66,24 +66,58 @@ function App() {
     }
 
     res
-      .then((response) => {
+      .then(async (response) => {
         if (!response.ok) {
           localStorage.clear();
           return;
         }
-        return response.json();
-      })
-      .then((json) => {
+
+        const json = await response.json();
         if (!json) {
           return;
         }
-
+  
         setUserId(json.id);
         setIsAdmin(json.isAdmin);
         setUserName(json.name);
-      });
+      })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // This useEffect is executed when the userId state changes value. userId's 
+  // value changes when the App component is rendered (page refresh) and when
+  // the user logs in.
+  useEffect(() => {
+    loadCart();
+  }, [userId]);
+
+  // Loads the contents of the user's cart - from the server.
+  function loadCart() {
+    const res = getRequest(`cart/${userId}`);
+    if (!res) {
+      return;
+    }
+
+    res.then(async (response) => {
+      if (!response.ok) {
+        return;
+      }
+
+      const json: { records: TBasicInformation[] } = await response.json();
+      let cartRecords: TRecord[] = [];
+
+      for (let i = 0; i < json.records.length; i++) {
+        const basicInfo = json.records[i];
+        cartRecords.push({
+          id: basicInfo.id,
+          date_added: "",
+          basic_information: basicInfo
+        });
+      }
+
+      setCartRecords(cartRecords);
+    });
+  }
 
   function handleLogout() {
     localStorage.clear();
@@ -117,23 +151,6 @@ function App() {
         setUserId(json.id);
         setUserName(json.name);
         navigate("/");
-
-        const res = getRequest(`cart/${json.id}`);
-        if (!res) {
-          return;
-        }
-
-        res
-          .then((response) => {
-            if (!response.ok) {
-              return;
-            }
-            return response.json();
-          })
-          .then((json: { records: TRecord[] }) => {
-            console.log(json.records.length);
-            setCartRecords(json.records);
-          });
 
         toast.success(`Welcome back ${json.name}!`, {
           position: "top-right",

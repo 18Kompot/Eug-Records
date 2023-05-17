@@ -37,27 +37,25 @@ export type TTrack = {
   duration: string;
 };
 
+export type TBasicInformation = {
+  id: number;
+  master_id: number;
+  resource_url: string;
+  thumb: string;
+  title: string;
+  year: number;
+  cover_image: string;
+  labels: TLabel[];
+  artists: TArtist[];
+  formats: TFormat[];
+  genres: string[];
+  style: string[];
+};
+
 export type TRecord = {
   id: number;
-  instance_id: number;
   date_added: string;
-  rating: number;
-  basic_information: {
-    id: number;
-    master_id: number;
-    resource_url: string;
-    thumb: string;
-    title: string;
-    year: number;
-    cover_image: string;
-    labels: TLabel[];
-    artists: TArtist[];
-    formats: TFormat[];
-    genres: string[];
-    style: string[];
-  };
-  folder_id: number;
-  is_favorite: boolean;
+  basic_information: TBasicInformation;
 };
 
 export type TCollection = {
@@ -75,6 +73,7 @@ export type TCollection = {
 };
 
 export type InfoData = {
+  id: number;
   artists_sort: string;
   title: string;
   released_formatted: string;

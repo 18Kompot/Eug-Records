@@ -6,6 +6,7 @@ const logger = require("morgan");
 
 const headers = require("./middleware/headers");
 const auth = require("./middleware/auth");
+const discogs = require("./middleware/discogs");
 
 const indexRouter = require("./routes/index");
 const recordsRouter = require("./routes/records");
@@ -25,11 +26,11 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(headers);
 app.use("/", indexRouter);
-app.use("/records", auth, recordsRouter);
+app.use("/records", [discogs, auth], recordsRouter);
 app.use("/users", usersRouter);
 app.use("/password-reset", passwordReset);
 app.use("/contact-me", contactForm);
 app.use("/pages", pages);
-app.use("/cart", cart);
+app.use("/cart", [discogs, auth], cart);
 
 module.exports = app;

@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-const discogs = require("disconnect").Client;
 const config = require("../config/dev");
 
 module.exports = (req, res, next) => {
@@ -14,8 +13,6 @@ module.exports = (req, res, next) => {
     req.token = jwt.verify(token, config.jwt_token, {
       maxAge: "7d",
     });
-
-    req.client = new discogs({ userToken: config.discogs_token });
     next();
   } catch (err) {
     console.log(err);

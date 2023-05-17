@@ -1,10 +1,12 @@
+
 const { User } = require("../models/User");
 const { Cart } = require("../models/Cart");
-const Discogs = require("disconnect").Client;
 
 module.exports = {
   getAll: async function (req, res, next) {
     try {
+      console.log("[cart] getAll");
+
       const userId = req.params.userId;
       const cart = await Cart.find({ userId: userId });
 
@@ -13,18 +15,18 @@ module.exports = {
         return;
       }
 
-      var db = new Discogs().database();
-      let cartRecords = new Array();
-
+      let records = [];
+      var db = req.client.database();
       for (let i = 0; i < cart.length; i++) {
-        db.getRelease(cart.at(i).recordId, function (err, data) {
-          console.log(data);
-          cartRecords.push(data);
+        const data = await db.getRelease(cart.at(i).recordId);
+        records.push({
+          ...data,
+          cover_image: data.images[0].resource_url
         });
       }
-
+      
       res.json({
-        records: cartRecords,
+        records: records,
       });
     } catch (err) {
       console.log(err);
