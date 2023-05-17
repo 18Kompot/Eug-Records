@@ -75,7 +75,12 @@ function Home() {
               As a result - the sales, manufacturing, and demand for turntables
               and record players have also increased by hundreds of percent.
             </p>
-            <img src="./images/riaa.png" alt="stat" />
+            <img
+              src="./images/riaa.png"
+              alt="stat"
+              height="400px"
+              width="400px"
+            />
             <Title
               main={<></>}
               sub={

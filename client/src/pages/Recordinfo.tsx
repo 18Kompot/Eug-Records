@@ -17,7 +17,6 @@ function Recordinfo() {
     res
       .then((response) => response.json())
       .then((json: any) => {
-        console.log(json);
         setRecord({
           id: json.id,
           date_added: "",

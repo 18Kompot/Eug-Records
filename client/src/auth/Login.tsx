@@ -102,7 +102,7 @@ function Login({ handler }: Props) {
                         <button
                           type="button"
                           onClick={submit}
-                          className="btn btn-info btn-lg"
+                          className="btn btn-warning btn-lg"
                         >
                           Login
                         </button>
@@ -111,15 +111,19 @@ function Login({ handler }: Props) {
                         className="nav-link text-secondary"
                         to={"/password-reset"}
                       >
-                        Forgot password
+                        <p className="text-secondary">
+                          Forgot password? Click here!
+                        </p>
                       </NavLink>
                     </div>
                   </div>
-                  <div className="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+                  <div className="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center justify-content-end order-1 order-lg-2">
                     <img
-                      src="/images/login.png"
+                      src="/images/signuprecord.png"
                       className="img-fluid m-5"
                       alt="loginplayer"
+                      height="400px"
+                      width="400px"
                     />
                   </div>
                 </div>

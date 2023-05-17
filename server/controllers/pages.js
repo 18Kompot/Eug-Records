@@ -1,4 +1,3 @@
-
 const { Page } = require("../models/Page");
 const joi = require("joi");
 
@@ -13,27 +12,21 @@ module.exports = {
       }
 
       res.json({
-        content: page.content
+        content: page.content,
       });
     } catch (err) {
-      console.log(err);
       res.status(400).json({ error: "error getting the page" });
     }
   },
 
   edit: async function (req, res, next) {
     try {
-      console.log(`[pages.edit] TOP`);
-
       const scheme = joi.object({
-        content: joi.string().required().allow("")
+        content: joi.string().required().allow(""),
       });
-
-      console.log(`[pages.edit] req: ${req}`);
 
       const { error, value } = scheme.validate(req.body);
       if (error) {
-        console.log(error.details[0].message);
         res.status(400).json({ error: "invalid data" });
         return;
       }
@@ -51,10 +44,8 @@ module.exports = {
         await page.save();
       }
 
-      console.log("Page found. (status: 200)");
       res.status(200).json({ status: 200 });
     } catch (err) {
-      console.log(err);
       res.status(400).json({ error: "failed to update data" });
     }
   },

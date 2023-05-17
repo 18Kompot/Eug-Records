@@ -99,12 +99,16 @@ function Header() {
                   )}
                 </Link>
                 <Dropdown>
-                  <Dropdown.Toggle variant="info" id="dropdown-basic">
+                  <Dropdown.Toggle
+                    variant="info"
+                    id="dropdown-basic"
+                    className="btn-warning"
+                  >
                     <User />
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
-                    <Dropdown.Item as="button">
+                    <Dropdown.Item as="button" className="btn">
                       <Logout />
                     </Dropdown.Item>
                   </Dropdown.Menu>

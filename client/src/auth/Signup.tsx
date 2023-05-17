@@ -131,7 +131,7 @@ function Signup() {
                             value={password}
                             onChange={(e) => setIsAdmin(e.target.checked)}
                           />
-                          <label>Wanna be an admin?</label>
+                          <label>Want to be an admin?</label>
                         </div>
                       </div>
 
@@ -139,18 +139,20 @@ function Signup() {
                         <button
                           type="button"
                           onClick={submit}
-                          className="btn btn-info btn-lg"
+                          className="btn btn-warning btn-lg"
                         >
                           Register
                         </button>
                       </div>
                     </div>
                   </div>
-                  <div className="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+                  <div className="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center justify-content-end order-1 order-lg-2">
                     <img
-                      src="https://seeklogo.com/images/V/vinyl-record-breaking-into-music-notes-logo-312D77C960-seeklogo.com.png"
+                      src="/images/signuprecord.png"
                       className="img-fluid m-5"
                       alt="Sample"
+                      height="400px"
+                      width="400px"
                     />
                   </div>
                 </div>

@@ -1,12 +1,9 @@
-
 const { User } = require("../models/User");
 const { Cart } = require("../models/Cart");
 
 module.exports = {
   getAll: async function (req, res, next) {
     try {
-      console.log("[cart] getAll");
-
       const userId = req.params.userId;
       const cart = await Cart.find({ userId: userId });
 
@@ -21,10 +18,10 @@ module.exports = {
         const data = await db.getRelease(cart.at(i).recordId);
         records.push({
           ...data,
-          cover_image: data.images[0].resource_url
+          cover_image: data.images[0].resource_url,
         });
       }
-      
+
       res.json({
         records: records,
       });

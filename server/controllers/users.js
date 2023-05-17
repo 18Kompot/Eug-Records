@@ -1,5 +1,4 @@
 const { User } = require("../models/User");
-const { Token } = require("../models/Token");
 const jwt = require("jsonwebtoken");
 const jwt_token = process.env.JWT_TOKEN;
 const joi = require("joi");

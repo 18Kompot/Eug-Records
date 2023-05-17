@@ -1,6 +1,3 @@
-const Discogs = require("disconnect").Client;
-const fs = require("fs");
-
 module.exports = {
   list: async function (request, result, next) {
     try {
@@ -25,7 +22,6 @@ module.exports = {
       var db = request.client.database();
       const id = parseInt(request.params.id);
       db.getRelease(id, function (err, data) {
-        console.log(data);
         result.json({
           ...data,
           cover_image: data.images[0].resource_url,

@@ -39,7 +39,6 @@ module.exports = {
       res.json({ message: "password reset link sent to your email account" });
     } catch (error) {
       res.json({ error: "An error occured " });
-      console.log(error);
     }
   },
 
@@ -71,7 +70,6 @@ module.exports = {
       res.json({ message: "password reset successful" });
     } catch (error) {
       res.json({ error: "An error occured" });
-      console.log(error);
     }
   },
 };

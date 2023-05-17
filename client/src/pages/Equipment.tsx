@@ -7,14 +7,19 @@ function Equipment() {
         <div className="container">
           <div className="m-5">
             <h2 className="text-white text-center">My equipment</h2>
-            <br />
           </div>
           <div className="row">
-            <div className="m-5">
-              <br />
-              <h3 className="text-center text-white fw-normal mb-4">
+            <div>
+              <h3 className="text-center text-white fw-normal m-4">
                 Sony PS-LX310BT
               </h3>
+            </div>
+            <div className="col-sm-6">
+              <img
+                className="img-fluid"
+                src="/images/sony.png"
+                alt="turntable"
+              />
             </div>
             <p className="col-sm-6 text-white align-self-center">
               The Sony PS-LX310BT turntable is a great value — especially at the
@@ -25,20 +30,13 @@ function Equipment() {
               modern, minimalist design that packs a real visual punch and makes
               this turntable look far more expensive than it is.
             </p>
-            <div className="col-sm-6">
-              <img
-                className="img-fluid"
-                src="/images/sony.png"
-                alt="turntable"
-              />
-            </div>
           </div>
         </div>
         <div className="container">
           <div className="row">
             <div className="m-5">
               <br />
-              <h3 className="text-center text-white fw-normal mb-4">
+              <h3 className="text-center text-white fw-normal m-4">
                 Ampapa A1 Preamp
               </h3>
             </div>
@@ -71,9 +69,9 @@ function Equipment() {
               decorates with warm orange / cool green lights etc., all is for
               the best listening experience.
             </p>
-            <div className="col-sm-6">
+            <div className="col-sm-6 align-items-center justify-content-start">
               <img
-                className="img-fluid"
+                className="img-fluid m-4"
                 src="/images/ampapa.png"
                 alt="preamp"
               />
@@ -84,9 +82,16 @@ function Equipment() {
           <div className="row">
             <div className="m-5">
               <br />
-              <h3 className="text-center text-white fw-normal mb-4">
+              <h3 className="text-center text-white fw-normal m-4">
                 Klipsch The Fives
               </h3>
+            </div>
+            <div className="col-sm-6 align-items-cente justify-content-start">
+              <img
+                className="img-fluid"
+                src="/images/fives.png"
+                alt="speakers"
+              />
             </div>
             <p className="col-sm-6 text-white align-self-center">
               The Fives can immensely improve your TV's sound, easy-to-use,
@@ -108,13 +113,6 @@ function Equipment() {
               5, HDMI-ARC, digital optical, analog RCA and USB inputs, and a
               subwoofer output.
             </p>
-            <div className="col-sm-6">
-              <img
-                className="img-fluid"
-                src="/images/fives.png"
-                alt="speakers"
-              />
-            </div>
           </div>
         </div>
       </Editable>

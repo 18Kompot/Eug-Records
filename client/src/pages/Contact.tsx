@@ -2,7 +2,6 @@ import Joi from "joi";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { postRequest } from "../services/api";
-import Title from "../components/Title";
 
 function Contact() {
   const [name, setName] = useState<string>("");
@@ -87,7 +86,15 @@ function Contact() {
 
   return (
     <>
-      <Title main={<>Contact form</>} sub={<></>} />
+      <div className="d-flex justify-content-center m-4">
+        <img
+          className="img-fluid"
+          src="/images/contactme.png"
+          alt="contactme"
+          height="300px"
+          width="300px"
+        />
+      </div>
       <div className="row justify-content-center">
         <div className="col-md-10 col-lg-6 col-xl-5">
           <div className="mb-3">
@@ -152,7 +159,7 @@ function Contact() {
           <button
             type="submit"
             onClick={submit}
-            className="btn btn-primary mb-5"
+            className="btn btn-warning mb-5"
           >
             Submit
           </button>

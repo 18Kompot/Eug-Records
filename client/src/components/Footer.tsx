@@ -27,16 +27,16 @@ function Footer() {
             <p>CONTACT INFORMATION</p>
             <div className="col justify-content-end">
               <Link to="/contact">
-                <i className="mx-2 bi bi-envelope-at-fill fs-4"></i>
+                <i className="mx-2 bi bi-envelope-at-fill fs-4 text-warning"></i>
               </Link>
               <Link target="_blank" to={"https://www.youtube.com/18Compton"}>
-                <i className="mx-2 bi bi-youtube fs-4"></i>
+                <i className="mx-2 bi bi-youtube fs-4 text-warning"></i>
               </Link>
               <Link target="_blank" to={"https://www.discogs.com/user/Primo18"}>
-                <i className="mx-2 bi bi-vinyl fs-4"></i>
+                <i className="mx-2 bi bi-vinyl fs-4 text-warning"></i>
               </Link>
               <Link target="_blank" to={"https://www.linkedin.com/in/eugkro/"}>
-                <i className="mx-2 bi bi-linkedin fs-4"></i>
+                <i className="mx-2 bi bi-linkedin fs-4 text-warning"></i>
               </Link>
             </div>
           </div>

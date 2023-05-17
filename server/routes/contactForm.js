@@ -5,7 +5,7 @@ const sendEmail = require("../utils/sendEmail");
 router.post("/contact", async (req, res) => {
   const name = req.body.name;
   const email = req.body.email;
-  const subject = `(Contact Form) ${req.body.subject}`;
+  const subject = `(Eug Records Contact Form) - ${req.body.subject}`;
   const message = `<p>Name: ${name}</p>
                    <p>Email: ${email}</p>
                    <p>Message: ${req.body.message}</p>`;

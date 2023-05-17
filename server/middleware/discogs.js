@@ -6,7 +6,6 @@ module.exports = (req, res, next) => {
     req.client = new discogs({ userToken: discogs_token });
     next();
   } catch (err) {
-    console.log(err);
     res.status(401).send("Failed to authenticate Discogs.");
   }
 };

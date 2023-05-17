@@ -22,7 +22,7 @@ function Cart() {
       )}
 
       <div className="container">
-        <div className="row d-flex justify-content-center m-3 text-center g-5">
+        <div className="row d-flex justify-content-center p-4 text-center g-5">
           {records.map((record, key) => (
             <div
               key={key}
