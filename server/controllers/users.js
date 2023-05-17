@@ -1,7 +1,7 @@
 const { User } = require("../models/User");
 const { Token } = require("../models/Token");
 const jwt = require("jsonwebtoken");
-const config = require("../config/dev");
+const jwt_token = process.env.JWT_TOKEN;
 const joi = require("joi");
 const bcrypt = require("bcrypt");
 
@@ -71,7 +71,7 @@ module.exports = {
       }
 
       const param = { email: value.email };
-      const token = jwt.sign(param, config.jwt_token, { expiresIn: "7d" });
+      const token = jwt.sign(param, jwt_token, { expiresIn: "7d" });
 
       result.json({
         token: token,

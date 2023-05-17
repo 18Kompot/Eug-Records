@@ -8,7 +8,6 @@ interface ResetData {
   email: string;
 }
 function Resetpass() {
-  const navigate = useNavigate();
   const [email, setEmail] = useState<string>("");
 
   function submit() {
@@ -51,7 +50,16 @@ function Resetpass() {
           });
           return;
         }
-        navigate("/newpassword");
+        toast.success(`An email was sent to ${email}`, {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+          theme: "light",
+        });
       });
   }
 

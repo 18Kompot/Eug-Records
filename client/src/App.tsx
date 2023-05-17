@@ -18,7 +18,7 @@ import Resetpass from "./auth/Resetpass";
 import Newpass from "./auth/Newpass";
 import Recordinfo from "./pages/Recordinfo";
 import "./App.css";
-import { InfoData, TBasicInformation, TRecord } from "./pages/types";
+import { TBasicInformation, TRecord } from "./pages/types";
 import Cart from "./pages/Cart";
 import RouteGuard from "./auth/RouteGuard";
 import Equipment from "./pages/Equipment";
@@ -65,26 +65,25 @@ function App() {
       return;
     }
 
-    res
-      .then(async (response) => {
-        if (!response.ok) {
-          localStorage.clear();
-          return;
-        }
+    res.then(async (response) => {
+      if (!response.ok) {
+        localStorage.clear();
+        return;
+      }
 
-        const json = await response.json();
-        if (!json) {
-          return;
-        }
-  
-        setUserId(json.id);
-        setIsAdmin(json.isAdmin);
-        setUserName(json.name);
-      })
+      const json = await response.json();
+      if (!json) {
+        return;
+      }
+
+      setUserId(json.id);
+      setIsAdmin(json.isAdmin);
+      setUserName(json.name);
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // This useEffect is executed when the userId state changes value. userId's 
+  // This useEffect is executed when the userId state changes value. userId's
   // value changes when the App component is rendered (page refresh) and when
   // the user logs in.
   useEffect(() => {
@@ -111,7 +110,7 @@ function App() {
         cartRecords.push({
           id: basicInfo.id,
           date_added: "",
-          basic_information: basicInfo
+          basic_information: basicInfo,
         });
       }
 
@@ -142,17 +141,12 @@ function App() {
     const res = postRequest("users/login", data, false);
     if (!res) return;
 
-    res
-      .then((response) => response.json())
-      .then((json) => {
-        setToken(json.token);
-        setStoredUsername(json.name);
-        setIsAdmin(json.isAdmin);
-        setUserId(json.id);
-        setUserName(json.name);
-        navigate("/");
-
-        toast.success(`Welcome back ${json.name}!`, {
+    res.then(async (response) => {
+      if (!response.ok) {
+        const json: {
+          error: string;
+        } = await response.json();
+        toast.error(`${json.error}!`, {
           position: "top-right",
           autoClose: 2000,
           hideProgressBar: true,
@@ -162,7 +156,33 @@ function App() {
           progress: undefined,
           theme: "light",
         });
+        return;
+      }
+
+      const json: {
+        id: string;
+        name: string;
+        isAdmin: boolean;
+        token: string;
+      } = await response.json();
+      setToken(json.token);
+      setStoredUsername(json.name);
+      setIsAdmin(json.isAdmin);
+      setUserId(json.id);
+      setUserName(json.name);
+      navigate("/");
+
+      toast.success(`Welcome back ${json.name}!`, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+        theme: "light",
       });
+    });
   }
 
   function addCartRecord(record: TRecord) {

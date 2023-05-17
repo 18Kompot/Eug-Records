@@ -1,14 +1,12 @@
-
 const discogs = require("disconnect").Client;
-const config = require("../config/dev");
+const discogs_token = process.env.DISCOGS_TOKEN;
 
 module.exports = (req, res, next) => {
-    try {
-        req.client = new discogs({ userToken: config.discogs_token })
-        next();
-    }
-    catch (err) {
-        console.log(err);
-        res.status(401).send("Failed to authenticate Discogs.");
-    }
-}
+  try {
+    req.client = new discogs({ userToken: discogs_token });
+    next();
+  } catch (err) {
+    console.log(err);
+    res.status(401).send("Failed to authenticate Discogs.");
+  }
+};

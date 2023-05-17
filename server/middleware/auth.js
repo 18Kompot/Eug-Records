@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const config = require("../config/dev");
+const jwt_token = process.env.JWT_TOKEN;
 
 module.exports = (req, res, next) => {
   const token = req.header("x-auth-token");
@@ -10,7 +10,7 @@ module.exports = (req, res, next) => {
     return;
   }
   try {
-    req.token = jwt.verify(token, config.jwt_token, {
+    req.token = jwt.verify(token, jwt_token, {
       maxAge: "7d",
     });
     next();

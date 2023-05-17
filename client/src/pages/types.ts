@@ -43,13 +43,17 @@ export type TBasicInformation = {
   resource_url: string;
   thumb: string;
   title: string;
+  artists_sort: string;
   year: number;
+  country: string;
   cover_image: string;
   labels: TLabel[];
   artists: TArtist[];
   formats: TFormat[];
   genres: string[];
   style: string[];
+  tracklist: TTrack[];
+  identifiers: TIdentifier[];
 };
 
 export type TRecord = {
@@ -70,20 +74,6 @@ export type TCollection = {
     };
   };
   releases: TRecord[];
-};
-
-export type InfoData = {
-  id: number;
-  artists_sort: string;
-  title: string;
-  released_formatted: string;
-  country: string;
-  labels: TLabel[];
-  artists: TArtist[];
-  genres: string[];
-  formats: TFormat[];
-  identifiers: TIdentifier[];
-  tracklist: TTrack[];
 };
 
 export interface ISignupData {

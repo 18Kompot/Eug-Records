@@ -1,4 +1,6 @@
 const nodemailer = require("nodemailer");
+const email_address = process.env.EMAIL;
+const email_password = process.env.EMAIL_PASS;
 
 module.exports = async (email, subject, text) => {
   try {
@@ -8,8 +10,8 @@ module.exports = async (email, subject, text) => {
       port: 587,
       secure: true,
       auth: {
-        user: "userovich260@gmail.com",
-        pass: "fyizjldkzlqkzpoz",
+        user: email_address,
+        pass: email_password,
       },
       tls: {
         rejectUnauthorized: false,

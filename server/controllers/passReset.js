@@ -30,7 +30,11 @@ module.exports = {
       const link = `${"http://localhost:3001/newpassword/"}${user._id}/${
         token.token
       }`;
-      await sendEmail(user.email, "Password reset - follow the link", link);
+      await sendEmail(
+        user.email,
+        "Eug Records - password reset link",
+        `Follow the link to reset your password: ${link}`
+      );
 
       res.json({ message: "password reset link sent to your email account" });
     } catch (error) {

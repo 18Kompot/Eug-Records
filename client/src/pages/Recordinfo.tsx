@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getRequest } from "../services/api";
-import { InfoData, TFormat, TIdentifier, TLabel, TTrack } from "./types";
+import { TFormat, TIdentifier, TLabel, TRecord, TTrack } from "./types";
 
 function Recordinfo() {
   const { id } = useParams();
 
-  const [record, setRecord] = useState<InfoData>();
+  const [record, setRecord] = useState<TRecord>();
 
   // const [error, setError] = useState<string>("");
 
@@ -17,7 +17,12 @@ function Recordinfo() {
     res
       .then((response) => response.json())
       .then((json: any) => {
-        setRecord(json);
+        console.log(json);
+        setRecord({
+          id: json.id,
+          date_added: "",
+          basic_information: json,
+        });
       });
   }, [id]);
 
@@ -111,25 +116,34 @@ function Recordinfo() {
       <div className="p-4 container">
         <div className="card bg-light">
           <div className="card-body">
-            <h6>{record?.title}</h6>
+            <h6>{record?.basic_information.title}</h6>
+            <img
+              src={record?.basic_information.cover_image}
+              alt="cover"
+              height="200px"
+              width="200px"
+            />
             <p>
-              <b>Artist:</b> {record?.artists_sort}
+              <b>Artist:</b> {record?.basic_information.artists_sort}
               <br />
-              <b>Released:</b> {record?.released_formatted}
+              <b>Released:</b> {record?.basic_information.year}
             </p>
             <hr></hr>
             <div>
-              <b>Format:</b> {getFormats(record?.formats ?? [])}
+              <b>Format:</b>{" "}
+              {getFormats(record?.basic_information.formats ?? [])}
               <br />
-              <b>Label:</b> {getLabels(record?.labels ?? [])}
+              <b>Label:</b> {getLabels(record?.basic_information.labels ?? [])}
               <br />
-              <b>Genre:</b> {record?.genres}
+              <b>Genre:</b> {record?.basic_information.genres}
               <br />
-              <b>Press Region:</b> {record?.country}
+              <b>Press Region:</b> {record?.basic_information.country}
               <br />
-              <b>Catno:</b> {getIdentifier(record?.identifiers ?? [])}
+              <b>Catno:</b>{" "}
+              {getIdentifier(record?.basic_information.identifiers ?? [])}
               <br />
-              <b>Tracklist:</b> {getTracks(record?.tracklist ?? [])}
+              <b>Tracklist:</b>{" "}
+              {getTracks(record?.basic_information.tracklist ?? [])}
             </div>
           </div>
         </div>
