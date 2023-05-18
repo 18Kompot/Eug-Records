@@ -47,7 +47,7 @@ module.exports = {
       const schema = Joi.object({
         id: Joi.string().required(),
         token: Joi.string().required(),
-        password: Joi.string().required(),
+        password: Joi.string().min(6).max(1024).required(),
       });
       const { error } = schema.validate(req.body);
       if (error) return res.status(400).json(error.details[0].message);

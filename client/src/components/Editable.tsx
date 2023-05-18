@@ -39,22 +39,21 @@ export default function Editable(props: IEditableProps) {
       return;
     }
 
-    res
-      .then((response) => {
-        if (!response.ok) {
-          return;
-        }
-        return response.json();
-      })
-      .then((json: { content: string }) => {
-        // The input object (json) is undefined when the server can't find the
-        // page in the database. When this is the case, we need to show the
-        // default.
-        const hasData = json !== undefined;
+    res.then(async (response) => {
+      if (!response.ok) {
+        return;
+      }
 
-        setWasEdited(hasData);
-        setContent(hasData ? json.content : getEditValue());
-      });
+      const json: any = await response.json();
+      if (!json) {
+        return;
+      }
+
+      const hasData = json.error === undefined;
+
+      setWasEdited(hasData);
+      setContent(hasData ? json.content : getEditValue());
+    });
   }, []);
 
   function toggleEdit() {

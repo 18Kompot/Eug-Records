@@ -7,12 +7,9 @@ module.exports = {
       const name = req.params.name;
       const page = await Page.findOne({ name: name });
 
-      if (!page) {
-        throw new Error("Failed to find page content.");
-      }
-
       res.json({
-        content: page.content,
+        error: !page ? "page not found" : undefined,
+        content: page ? page.content : undefined,
       });
     } catch (err) {
       res.status(400).json({ error: "error getting the page" });

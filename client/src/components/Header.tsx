@@ -26,7 +26,7 @@ function Header() {
                 className=""
                 src="/images/eugrec.png"
                 alt="logo"
-                height="96px"
+                height="100px"
               />
             </NavLink>
           </div>

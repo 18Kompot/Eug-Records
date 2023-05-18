@@ -18,7 +18,7 @@ function Footer() {
               <img
                 className=""
                 src="/images/eugrec.png"
-                alt="record"
+                alt="logo"
                 height="150px"
               />
             </NavLink>

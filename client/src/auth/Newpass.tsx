@@ -27,7 +27,7 @@ function Newpass() {
 
   function handleClick() {
     const schema = Joi.object().keys({
-      password: Joi.string().required(),
+      password: Joi.string().required().min(6).max(30),
     });
 
     const { error, value } = schema.validate({
