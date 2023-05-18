@@ -3,13 +3,6 @@ module.exports = {
     try {
       var col = request.client.user().collection();
       col.getReleases("Primo18", 0, function (err, data) {
-        // fs.writeFile('./records.json', JSON.stringify(data), (err) => {
-        //   if (err) {
-        //     console.error(err);
-        //   }
-        //   // file written successfully
-        // });
-
         result.json(data);
       });
     } catch (err) {
@@ -32,8 +25,3 @@ module.exports = {
     }
   },
 };
-
-// var db = new Discogs().database();
-// db.getRelease(176126, function (err, data) {
-//   console.log(data);
-// });

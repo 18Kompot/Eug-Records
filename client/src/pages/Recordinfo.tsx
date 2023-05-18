@@ -25,31 +25,6 @@ function Recordinfo() {
       });
   }, [id]);
 
-  //   function findTrack(record: any) {
-  //     if (record === undefined) return undefined;
-  //     for (let i = 0; i < record.tracklist.length; i++) {
-  //       let track = record.tracklist[i];
-  //       if (track.position === "A3") {
-  //         return track;
-  //       }
-  //     }
-  //     return undefined;
-  //   }
-
-  // function getTrackArtists(track: any) {
-  //   if (!track) {
-  //     return "";
-  //   }
-  //   let names = " ";
-  //   track.extraartists.forEach((artist: any, index: number) => {
-  //     if (index !== 0) {
-  //       names += ", ";
-  //     }
-  //     names += `${artist.name}`;
-  //   });
-  //   return names;
-  // }
-
   function getLabels(labels: TLabel[]) {
     if (labels.length < 1) {
       return "";

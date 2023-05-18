@@ -135,25 +135,6 @@ module.exports = {
     }
   },
 
-  // newpassword: async function (request, result, next) {
-  //   try {
-  //     const user = await User.findById(request.params.id);
-  //     if (!user) {
-  //       throw new Error("Invalid request URL");
-  //     }
-
-  //     const token = await Token.findOne({ token: request.params.token });
-  //     if (!token) {
-  //       throw new Error("Token invalid");
-  //     }
-  //     user.password = await bcrypt.hash(value.password, 10);
-  //     user.save();
-  //     result.json({ success: true });
-  //   } catch (err) {
-  //     result.status(400).json({ error: `${err}` });
-  //   }
-  // },
-
   // ====================================================================== //
   //
   // Fetches a user by ID, returning the user as JSON via the result argument.
