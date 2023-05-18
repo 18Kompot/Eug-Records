@@ -45,6 +45,11 @@
   overflow: hidden;
 }
 
+.home-image {
+  width: 350px;
+  height: 650px;
+}
+
 .carousel-image {
   background-position: center;
   background-size: contain;

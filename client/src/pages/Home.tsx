@@ -47,7 +47,7 @@ function Home() {
           main={<>Record collecting in the 21st century</>}
           sub={<>Do people still listen to vinyl records nowadays?</>}
         />
-        <div className="container-fluid m-4">
+        <div className="container m-4">
           <div className="row">
             <p className="text-white align-self-center">
               As a record collector, I keep getting this question from a lot of
@@ -75,12 +75,7 @@ function Home() {
               As a result - the sales, manufacturing, and demand for turntables
               and record players have also increased by hundreds of percent.
             </p>
-            <img
-              src="./images/riaa.png"
-              alt="stat"
-              height="400px"
-              width="400px"
-            />
+            <img className="home-image" src="./images/riaa.png" alt="stat" />
             <Title
               main={<></>}
               sub={
