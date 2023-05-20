@@ -86,7 +86,7 @@ function Resetpass() {
                       <button
                         type="button"
                         onClick={submit}
-                        className="btn btn-info btn-lg m-2"
+                        className="btn btn-warning btn-lg m-2"
                       >
                         Reset
                       </button>

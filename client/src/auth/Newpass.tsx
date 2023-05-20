@@ -92,7 +92,7 @@ function Newpass() {
                       <button
                         onClick={handleClick}
                         type="button"
-                        className="btn btn-info btn-lg"
+                        className="btn btn-warning btn-lg"
                       >
                         Confirm change
                       </button>
