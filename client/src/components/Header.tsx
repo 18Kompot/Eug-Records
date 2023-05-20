@@ -88,7 +88,7 @@ function Header() {
             {isLoggedIn && (
               <div className="d-flex align-items-center">
                 <Link
-                  to={"/cart"}
+                  to="/cart"
                   className="btn btn-light bi bi-cart3 me-3 position-relative"
                 >
                   {numCartItems > 0 && (
@@ -106,7 +106,6 @@ function Header() {
                   >
                     <User />
                   </Dropdown.Toggle>
-
                   <Dropdown.Menu>
                     <Dropdown.Item as="button" className="btn">
                       <Logout />
